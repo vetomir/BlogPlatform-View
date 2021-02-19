@@ -42,6 +42,7 @@ class AuthService {
 
     }
 
+
     getCurrentUser() {
         return UserService.getCurrentUser();
     }

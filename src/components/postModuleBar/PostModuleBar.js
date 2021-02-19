@@ -1,0 +1,87 @@
+import {Component} from "react";
+import Item from "./Items";
+import styled from "styled-components";
+import {colors} from "../utils/Colors";
+import {PostEntity} from "../../controllers/entities/PostEntity";
+
+const Wrapper = styled.div`
+  margin: 1rem 0;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .Post{
+    width: 350px; 
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+    overflow: hidden;
+    &:focus, &:hover, &:visited, &:link, &:active {
+      text-decoration: none;
+    }
+    &:hover{
+      background: ${colors.blue};
+      transition: 350ms;
+      .Image{
+        transform: scale(1.1);
+        transition: 350ms;
+      }
+      .Description {
+        .Title{
+          color: ${colors.black};
+          transition: 350ms;
+        }
+        .Lead{
+          color: ${colors.black};
+          transition: 350ms;
+        }
+        
+      }
+    }
+    .Image{
+      width: 80px;
+      object-fit: cover;
+    }
+    .Description{
+      margin-left: .5rem;
+      display: flex;
+      flex-direction: column;
+      font-size: .8rem;
+      justify-content: center;
+      line-height: 1rem;
+
+      .Title{
+        font-weight: bold;
+        color: ${colors.white};
+        margin: 0 0 .1rem 0;
+        text-decoration: none;
+      }
+      .Lead{
+        color: ${colors.lightGray};
+        margin: 0;
+      }
+    }
+  }
+`;
+
+class PostModuleBar extends Component {
+    state = {
+        posts: [
+            PostEntity
+        ]
+    }
+    render() {
+        const posts = this.props.posts
+        return (
+            <Wrapper>
+                {posts.map(
+                    post =>
+                        <Item post={post}/>
+                )}
+            </Wrapper>
+        )
+    }
+}
+export default PostModuleBar;

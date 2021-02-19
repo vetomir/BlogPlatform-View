@@ -1,0 +1,26 @@
+export const UserEntity = {
+    id:0,
+    nickname:'',
+    name:'',
+    surname:'',
+    photoUrl:'',
+    posts:[
+        {
+            id:0,
+            title:'',
+            lead:'',
+            content:'',
+            createdOn:'',
+            photoUrl:'',
+            photoSource:'',
+            tags:[],
+        }
+    ],
+    comments:[
+        {
+            id:0,
+            content:0,
+            createdOn:0,
+        }
+    ]
+};

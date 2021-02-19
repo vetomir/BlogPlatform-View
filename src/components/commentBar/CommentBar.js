@@ -1,0 +1,84 @@
+import styled from "styled-components";
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
+import {colors} from "../utils/Colors";
+
+const Wrapper = styled.div`
+  margin: 1rem 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+  .Comment{
+    width: 30%;
+    border-left: 1px solid ${colors.gray};
+    padding-left: 1rem;
+    box-sizing: border-box;
+    &:focus, &:hover, &:visited, &:link, &:active {
+      text-decoration: none;
+    }
+    &:hover{
+      transition: 350ms;
+      border-color: ${colors.orange};
+      .Content{
+        transition: 350ms;
+        color: ${colors.orange};
+      }
+    }
+    .Author{
+      font-size: .8rem;
+      color: ${colors.blue};
+      margin: 0;
+    }
+    .Content{
+      font-size: .8rem;
+      line-height: .8rem;
+      color: ${colors.white};
+      margin: .5rem 0 0 0;
+    }
+  }
+`;
+
+class CommentBar extends Component {
+    state = {
+        comments: [
+            {
+                content: '',
+                createdOn: '',
+                author: {
+                    nickname: '',
+                },
+                commentedPost: {
+                    id: 0,
+                }
+            }
+        ],
+        error: ""
+    }
+
+
+    render() {
+
+        const comments = this.props.comments
+        return (
+            <Wrapper>
+                {comments.map(
+                    comment =>
+                        <Link to={`/posts?id=${comment.commentedPost.id}`} className='Comment' key={'commentbar ' + comment.id}>
+                            <h4 className='Author'>
+                                {comment.commentedPost.title}
+                            </h4>
+                            <p className='Content'
+                               dangerouslySetInnerHTML={{__html: comment.author.nickname + ": " + comment.content.substring(0, 100) + "..."}}
+                            >
+                            </p>
+                        </Link>
+                )}
+            </Wrapper>
+        )
+    }
+}
+export default CommentBar;
