@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import {colors} from "../utils/Colors";
+import {colors} from "../../utils/Colors";
+import {AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
 
 const Wrapper = styled.div`
+  animation: ${ModuleShowUp} 2000ms;
+  box-sizing: border-box;
   margin: 1rem 0;
+  height: 100px;
   width: 100%;
-  height: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,18 +68,25 @@ class CommentBar extends Component {
         const comments = this.props.comments
         return (
             <Wrapper>
-                {comments.map(
-                    comment =>
-                        <Link to={`/posts?id=${comment.commentedPost.id}`} className='Comment' key={'commentbar ' + comment.id}>
-                            <h4 className='Author'>
-                                {comment.commentedPost.title}
-                            </h4>
-                            <p className='Content'
-                               dangerouslySetInnerHTML={{__html: comment.author.nickname + ": " + comment.content.substring(0, 100) + "..."}}
-                            >
-                            </p>
-                        </Link>
+                {comments.length !== 0 ? (
+                    <>
+                        {comments.map(
+                            comment =>
+                                <Link to={`/posts?id=${comment.commentedPost.id}`} className='Comment' key={'commentbar ' + comment.id}>
+                                    <h4 className='Author'>
+                                        {comment.commentedPost.title}
+                                    </h4>
+                                    <p className='Content'
+                                       dangerouslySetInnerHTML={{__html: comment.author.nickname + ": " + comment.content.substring(0, 100) + "..."}}
+                                    >
+                                    </p>
+                                </Link>
+                        )}
+                    </>
+                ) : (
+                    <AnimationLoadingWrapper/>
                 )}
+
             </Wrapper>
         )
     }

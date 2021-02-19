@@ -17,6 +17,7 @@ import TopBar from "./components/topBar/TopBar";
 import Footer from "./components/footer/Footer";
 
 const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap');
   body{
     padding: 0;
     font-family: ${fonts.main};
@@ -31,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
   *,*::before, *::after{
     box-sizing: border-box;
   }
-  p, a, h1, h2, h3, li, ul{
+  p, a, h1, h2, h3, li, ul, li{
     margin: 0;
     padding: 0;
   }
@@ -55,6 +56,7 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   return (
       <>
+          <title>Siemanko</title>
           <GlobalStyle/>
 
           <Router>

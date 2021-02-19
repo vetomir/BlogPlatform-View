@@ -1,12 +1,13 @@
 import {Component} from "react";
 import styled from "styled-components";
-import {colors} from "../utils/Colors";
-import {fonts} from "../utils/Fonts";
-import {Item} from "./Items";
-import {PostEntity} from "../../controllers/entities/PostEntity";
+import {colors} from "../../utils/Colors";
+import {fonts} from "../../utils/Fonts";
+import {PostFeedItems} from "./PostFeedItems";
+import {PostEntity} from "../../../controllers/entities/PostEntity";
+import {ModuleShowUp} from "../../utils/Loading";
 const Wrapper = styled.div`
-  
-  margin: -6rem 0 0 0;
+  animation: ${ModuleShowUp} 2000ms;
+  margin:0;
   width: 100%;
   height: auto;
   display: flex;
@@ -203,7 +204,7 @@ class PostFeed extends Component {
         const posts = this.props.posts
         return (
             <Wrapper>
-                {posts.map(post => <Item post={post}/>)}
+                {posts.map(post => <PostFeedItems post={post}/>)}
             </Wrapper>
         )
     }

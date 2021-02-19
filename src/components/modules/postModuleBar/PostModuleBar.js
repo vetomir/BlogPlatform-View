@@ -1,10 +1,12 @@
 import {Component} from "react";
-import Item from "./Items";
+import PostModuleBarItems from "./PostModuleBarItems";
 import styled from "styled-components";
-import {colors} from "../utils/Colors";
-import {PostEntity} from "../../controllers/entities/PostEntity";
+import {colors} from "../../utils/Colors";
+import {PostEntity} from "../../../controllers/entities/PostEntity";
+import {AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
 
-const Wrapper = styled.div`
+const Wrapper = styled.ul`
+  animation: ${ModuleShowUp} 2000ms;
   margin: 1rem 0;
   width: 100%;
   height: 100px;
@@ -76,10 +78,19 @@ class PostModuleBar extends Component {
         const posts = this.props.posts
         return (
             <Wrapper>
-                {posts.map(
-                    post =>
-                        <Item post={post}/>
+                {posts.length !== 0 ? (
+                    <>
+                        {posts.map(
+                            post =>
+                                <PostModuleBarItems post={post}/>
+
+                        )}
+                    </>
+                ) : (
+                    <AnimationLoadingWrapper/>
                 )}
+
+
             </Wrapper>
         )
     }

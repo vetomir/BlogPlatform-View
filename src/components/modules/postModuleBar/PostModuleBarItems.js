@@ -1,14 +1,14 @@
 import {Component} from "react";
-import {PostEntity} from "../../controllers/entities/PostEntity";
+import {PostEntity} from "../../../controllers/entities/PostEntity";
 
-class Item extends Component {
+class PostModuleBarItems extends Component {
     state = {
         post:PostEntity
     }
     render() {
         const post = this.props.post
         return (
-            <a href={`/posts?id=${post.id}`} className='Post' key={'headerBar' + post.id}>
+            <a href={`/posts?id=${post.id}`} className='Post' key={'postModuleBar' + post.id} >
                 <img
                     alt={post.title}
                     className='Image'
@@ -26,4 +26,4 @@ class Item extends Component {
         )
     }
 }
-export default Item;
+export default PostModuleBarItems;

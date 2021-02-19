@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {BiComment} from "react-icons/bi";
-import {PostEntity} from "../../controllers/entities/PostEntity";
+import {PostEntity} from "../../../controllers/entities/PostEntity";
 
-export class ItemBig extends Component {
+export class HeaderItemBig extends Component {
     state = {
         post:PostEntity
     }
@@ -11,7 +11,7 @@ export class ItemBig extends Component {
         const post = this.props.post
 
         return (
-            <Link to={`/posts?id=${post.id}`} className='FirstPost Post' key={post.id}>
+            <Link to={`/posts?id=${post.id}`} className='FirstPost Post' key={'Header ' + post.id}>
                 <img
                     alt={post.title + ": main article"}
                     className='Image'
@@ -32,7 +32,7 @@ export class ItemBig extends Component {
         )
     }
 }
-export function ItemSmall({post}) {
+export function HeaderItemSmall({post}) {
     return (
         <>
             <Link to={`/posts?id=${post.id}`} className='Post' key={"header " + post.id}>

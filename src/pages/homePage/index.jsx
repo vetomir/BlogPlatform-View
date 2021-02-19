@@ -2,19 +2,19 @@ import {Component} from "react";
 import PostService from "../../controllers/PostService";
 import AuthService from "../../controllers/AuthService";
 import {Pagination} from "../../components/utils/Pagination";
-import styled from "styled-components"
-import Header from "../../components/header/Header";
-import PostModuleBar from "../../components/postModuleBar/PostModuleBar";
-import CommentBar from "../../components/commentBar/CommentBar";
+import styled, {keyframes} from "styled-components"
+import Header from "../../components/modules/header/Header";
+import PostModuleBar from "../../components/modules/postModuleBar/PostModuleBar";
+import CommentBar from "../../components/modules/commentBar/CommentBar";
 import CommentService from "../../controllers/CommentService";
-import PostFeed from "../../components/postfeed/PostFeed";
+import PostFeed from "../../components/modules/postfeed/PostFeed";
 import {colors} from "../../components/utils/Colors";
+import DocumentMeta from 'react-document-meta';
 
 const DarkBg = styled.div`
   background: ${colors.black};
   width: 100%;
   height: auto;
-  padding-bottom: 7rem;
 `;
 
 const LightBg = styled.div`
@@ -31,7 +31,19 @@ const Wrapper = styled.div`
 `;
 const Module = styled.div`
   margin: 1rem;
+  position: relative;
 `;
+const meta = {
+    title: ': Home Page',
+    description: 'I am a description, and I can create multiple tags',
+    canonical: '/',
+    meta: {
+        charset: 'utf-8',
+        name: {
+            keywords: 'react,meta,document,html,tags'
+        }
+    }
+};
 class HomePage extends Component {
     constructor(props) {
         super(props)
@@ -156,6 +168,7 @@ class HomePage extends Component {
 
         return (
             <>
+                <DocumentMeta {...meta} />
                 <DarkBg>
                     <Wrapper>
                         <Module>
@@ -169,16 +182,20 @@ class HomePage extends Component {
                         </Module>
                     </Wrapper>
                 </DarkBg>
-                <LightBg>
-                    <Wrapper>
-                        <Module>
-                            <PostFeed posts={newsFeed}/>
-                        </Module>
-                        <Module>
-                            <Pagination page={page} feed={newsFeed}/>
-                        </Module>
-                    </Wrapper>
-                </LightBg>
+                {newsFeed.length > 1 ? (
+                    <LightBg>
+                        <Wrapper>
+                            <Module>
+                                <PostFeed posts={newsFeed}/>
+                            </Module>
+                            <Module>
+                                <Pagination page={page} feed={newsFeed}/>
+                            </Module>
+                        </Wrapper>
+                    </LightBg>
+                ) : (
+                    <></>
+                )}
             </>
         )
     }

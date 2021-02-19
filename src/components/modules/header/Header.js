@@ -1,12 +1,15 @@
 import {Component} from "react";
-import {ItemBig, ItemSmall} from "./Items";
-import {PostEntity} from "../../controllers/entities/PostEntity";
-import styled from "styled-components";
-import {colors} from "../utils/Colors";
-import {fonts} from "../utils/Fonts";
+import {HeaderItemBig, HeaderItemSmall} from "./HeaderItems";
+import {PostEntity} from "../../../controllers/entities/PostEntity";
+import styled, {keyframes} from "styled-components";
+import {colors} from "../../utils/Colors";
+import {fonts} from "../../utils/Fonts";
+import {AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
+
 
 
 const Wrapper = styled.div`
+  animation: ${ModuleShowUp} 2000ms;
   width: 100%;
   height: 516px;
   display: flex;
@@ -163,12 +166,18 @@ class Header extends Component {
         )
         return (
             <Wrapper>
-                <ItemBig post={firstPost}/>
-                <div className='Items'>
-                    {posts.slice(1).map(
-                        post => <ItemSmall post={post}/>
-                    )}
-                </div>
+                {posts.length !== 0 ? (
+                    <>
+                        <HeaderItemBig post={firstPost}/>
+                        <div className='Items'>
+                            {posts.slice(1).map(
+                                post => <HeaderItemSmall post={post}/>
+                            )}
+                        </div>
+                    </>
+                ) : (
+                    <AnimationLoadingWrapper/>
+                )}
             </Wrapper>
         )
     }

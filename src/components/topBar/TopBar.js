@@ -1,12 +1,15 @@
 import {Component} from "react";
 import {Link} from "react-router-dom";
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import {colors} from "../utils/Colors";
 import {fonts} from "../utils/Fonts";
 import {FaReact, FaSearch} from "react-icons/fa";
 import AuthService from "../../controllers/AuthService";
 import {ButtonLink} from "../utils/Buttons";
 import Navigation from "../navigation/Navigation";
+
+
+
 
 const Wrapper = styled.div`
   margin: 1rem auto;
@@ -20,6 +23,15 @@ const Wrapper = styled.div`
     font-size: 2rem;
     text-decoration: none;
     font-weight: bold;
+    &:hover{
+      color:${colors.orange};
+      transition: 500ms;
+      svg{
+        transform: rotate(180deg);
+        transition: 500ms;
+      }
+    }
+
   }
   .Register{
     cursor: pointer;
