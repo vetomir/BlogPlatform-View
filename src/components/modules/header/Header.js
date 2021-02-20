@@ -4,7 +4,7 @@ import {PostEntity} from "../../../controllers/entities/PostEntity";
 import styled, {keyframes} from "styled-components";
 import {colors} from "../../utils/Colors";
 import {fonts} from "../../utils/Fonts";
-import {AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
+import {AnimationLoadingHeaderWrapper, AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
 
 
 
@@ -15,7 +15,10 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  @media screen and (max-width: 1000px) {
+    height: auto;
+    flex-direction: column;
+  }
   .Items {
     display: flex;
     width: 50%;
@@ -23,6 +26,9 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: space-between;
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+    }
 
   }
 
@@ -34,6 +40,11 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     overflow: hidden;
+    @media screen and (max-width: 1000px) {
+      width: calc(50% - 1rem);
+      margin-bottom: 1rem;
+      margin-left: 0;
+    }
     &:hover{
       background: ${colors.orange};
       transition: 350ms;
@@ -122,6 +133,10 @@ const Wrapper = styled.div`
     width: 828px;
     height: 516px;
     margin: 0;
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
     .Content{
       padding: 5rem;
       font-size: 1.1rem;
@@ -176,7 +191,20 @@ class Header extends Component {
                         </div>
                     </>
                 ) : (
-                    <AnimationLoadingWrapper/>
+                    <AnimationLoadingHeaderWrapper>
+                        <div className='big'>
+                            <p/>
+                            <h1/>
+                            <p/>
+                            <h2/>
+                        </div>
+                        <div className='small'>
+                            <div/>
+                            <div/>
+                            <div/>
+                            <div/>
+                        </div>
+                    </AnimationLoadingHeaderWrapper>
                 )}
             </Wrapper>
         )

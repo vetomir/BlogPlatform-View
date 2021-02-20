@@ -17,7 +17,6 @@ import TopBar from "./components/topBar/TopBar";
 import Footer from "./components/footer/Footer";
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap');
   body{
     padding: 0;
     font-family: ${fonts.main};
@@ -42,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
   button, input, textarea, select{
     border: none;
     background: none;
+    
     &:focus{
       outline: none;
     }

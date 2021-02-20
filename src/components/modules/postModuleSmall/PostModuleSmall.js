@@ -11,6 +11,10 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1200px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
   .Post {
     text-decoration: none;
@@ -19,6 +23,9 @@ const Wrapper = styled.div`
     align-items: center;
     margin: .5rem 0;
     overflow: hidden;
+    @media screen and (max-width: 1200px) {
+      width: calc(50% - .5rem);
+    }
     &:hover{
       background: ${colors.orange};
       transition: 500ms;

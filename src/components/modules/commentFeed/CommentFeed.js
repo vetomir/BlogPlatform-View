@@ -14,9 +14,11 @@ const Wrapper = styled.ul`
   li{
     border-bottom: 1px solid ${colors.lightGray};
     margin: 1rem;
+    padding: 0 0 1rem 0;
     .Author{
       display: flex;
       text-decoration: none;
+      width: fit-content;
       img{
         width: 3rem;
         height: 3rem;
@@ -66,7 +68,7 @@ class CommentFeed extends Component {
             <Wrapper>
                 {comments.map( comment =>
                     <li key={comment.id}>
-                        <Link to={'/'} className='Author'>
+                        <Link to={`/profile?user=${comment.authorNickname}`} className='Author'>
                             <img alt={comment.id} src={comment.authorAvatar}/>
                             <div>
                                 <p className="Name">{comment.authorNickname}</p>

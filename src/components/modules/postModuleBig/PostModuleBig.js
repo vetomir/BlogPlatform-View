@@ -10,6 +10,11 @@ const Wrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1200px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
   .Post {
     position: relative;
@@ -20,6 +25,9 @@ const Wrapper = styled.div`
     align-items: center;
     margin: 0 0 1rem 0;
     overflow: hidden;
+    @media screen and (max-width: 1200px) {
+      width: calc(50% - .5rem);
+    }
     &:hover{
       background: ${colors.blue};
       transition: 350ms;
@@ -51,11 +59,13 @@ const Wrapper = styled.div`
       width: 100%;
       height: 100%;
       opacity: .3;
+      object-fit: cover;
     }
     div{
       position: absolute;
       margin-left: .5rem;
       display: flex;
+      width: 100%;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -63,6 +73,7 @@ const Wrapper = styled.div`
       
       p{
         margin: 0;
+        color:${colors.white};
       }
       .Date{
         color: ${colors.lightGray};

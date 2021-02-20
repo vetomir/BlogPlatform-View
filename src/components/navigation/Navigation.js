@@ -5,6 +5,8 @@ import {FaBars} from "react-icons/fa";
 import {AiOutlineClose} from "react-icons/ai";
 import {NavigationData} from "../../controllers/data/NavigationData";
 import {colors} from "../utils/Colors";
+import {CgCloseR} from "react-icons/cg";
+import {RiMenu4Line} from "react-icons/ri";
 
 const Wrapper = styled.div`
       .navbar {
@@ -16,12 +18,16 @@ const Wrapper = styled.div`
         display: flex;
         justify-content: start;
         align-items: center;
-       a{color: ${colors.white};} 
       }
       .menu-bars {
-        margin-left: 2rem;
+        margin-left: 1rem;
         font-size: 2rem;
         background: none;
+        color: ${colors.white};
+        &:hover{
+          transition: 500ms;
+          color: ${colors.orange};
+        }
       }
       .nav-menu {
         z-index: 999;
@@ -43,9 +49,7 @@ const Wrapper = styled.div`
         display: flex;
         justify-content: start;
         align-items: center;
-        padding: 8px 0 8px 16px;
         list-style: none;
-        height: 60px;
       }
       .nav-text a{
         text-decoration: none;
@@ -53,13 +57,15 @@ const Wrapper = styled.div`
         font-weight: 600;
         font-size: 18px;
         width: 95%;
+        padding: 1rem 2rem;
+        margin: 0 1rem 1rem 1rem;
         height: 100%;
         display: flex;
         align-items: center;
-        padding: 0 16px;
+        border-radius: 10px;
       }
       .nav-text a:hover{
-        background-color: #f3d250;
+        background-color: ${colors.orange};
         color: white;
       }
       .nav-menu-items {
@@ -70,7 +76,7 @@ const Wrapper = styled.div`
 
       .navbar-toggle {
         width: 100%;
-        height: 80px;
+        margin: 2rem 0;
         display: flex;
         justify-content: start;
         align-items: center;
@@ -85,21 +91,20 @@ function Navigation(){
         <Wrapper>
             <div className='navbar'>
                 <Link to="#" className='menu-bars'>
-                    <FaBars onClick={showSidebar}/>
+                    <RiMenu4Line onClick={showSidebar}/>
                 </Link>
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                 <ul className='nav-menu-items' onClick={showSidebar}>
                     <li className='navbar-toggle'>
                         <Link to='#' className='menu-bars'>
-                            <AiOutlineClose/>
+                            <CgCloseR/>
                         </Link>
                     </li>
                     {NavigationData.map((item, index) => {
                         return (
                             <li key={index} className={item.cName}>
                                 <Link to={item.path}>
-                                    {item.icon}
                                     <span>{item.title}</span>
                                 </Link>
                             </li>

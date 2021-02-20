@@ -18,6 +18,11 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 1200px;
+  @media screen and (max-width: 1400px) {
+    width: 100%;  
+    padding: 0 1rem 0 5rem;
+  }
+  
   .Logo{
     color: ${colors.white};
     font-size: 2rem;
@@ -190,7 +195,7 @@ class TopBar extends Component {
                                 value={searchQuery}
                                 onChange={this.onChangeSearchQuery}
                             />
-                            <a className='submit' href={`search?query=${searchQuery}`}><FaSearch/></a>
+                            <a className='submit' href={`/search?query=${searchQuery}`}><FaSearch/></a>
                         </Search>
 
 

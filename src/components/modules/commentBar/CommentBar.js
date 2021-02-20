@@ -2,7 +2,12 @@ import styled from "styled-components";
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {colors} from "../../utils/Colors";
-import {AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
+import {
+    AnimationLoadingCommentBarWrapper,
+    AnimationLoadingHeaderBarWrapper,
+    AnimationLoadingWrapper,
+    ModuleShowUp
+} from "../../utils/Loading";
 
 const Wrapper = styled.div`
   animation: ${ModuleShowUp} 2000ms;
@@ -84,7 +89,9 @@ class CommentBar extends Component {
                         )}
                     </>
                 ) : (
-                    <AnimationLoadingWrapper/>
+                    <AnimationLoadingCommentBarWrapper>
+                        <div/><div/><div/>
+                    </AnimationLoadingCommentBarWrapper>
                 )}
 
             </Wrapper>

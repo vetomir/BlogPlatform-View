@@ -6,14 +6,14 @@ export const UserEntity = {
     photoUrl:'',
     posts:[
         {
-            id:0,
-            title:'',
-            lead:'',
-            content:'',
-            createdOn:'',
-            photoUrl:'',
-            photoSource:'',
-            tags:[],
+            id: 0,
+            title: '',
+            lead: '',
+            author: '',
+            categoryName: '',
+            createdOn: '',
+            photoUrl: '',
+            tags: [],
         }
     ],
     comments:[

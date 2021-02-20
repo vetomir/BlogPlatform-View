@@ -43,3 +43,19 @@ export const Button = styled.button`
   }
 }
 `;
+export const Button_1 = styled.button`
+  cursor: pointer;
+  width: fit-content;
+  padding: 1rem;
+  border: 1px solid ${colors.indigo};
+  color: ${colors.white};
+  border-radius: 10px;
+  background: none;
+  font-size: 1rem;
+  margin: 1rem 0 ;
+  &:hover{
+    background: ${colors.orange};
+    color: ${colors.white};
+    transition: 350ms;
+  }
+`

@@ -28,22 +28,14 @@ const Wrapper = styled.div`
   width: 1200px;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 const Module = styled.div`
   margin: 1rem;
   position: relative;
 `;
-const meta = {
-    title: ': Home Page',
-    description: 'I am a description, and I can create multiple tags',
-    canonical: '/',
-    meta: {
-        charset: 'utf-8',
-        name: {
-            keywords: 'react,meta,document,html,tags'
-        }
-    }
-};
 class HomePage extends Component {
     constructor(props) {
         super(props)
@@ -56,9 +48,21 @@ class HomePage extends Component {
             newsFeed: [],
             error: "",
             page: 0,
-
+            /**/
             currentUser: {},
-            userReady: false
+            userReady: false,
+            /**/
+            meta: {
+                title: 'Home Page | blogs.',
+                description: 'I am a description, and I can create multiple tags',
+                canonical: '/',
+                meta: {
+                    charset: 'utf-8',
+                    name: {
+                        keywords: 'react,meta,document,html,tags'
+                    }
+                }
+            }
         }
     }
     componentDidMount() {
@@ -164,7 +168,7 @@ class HomePage extends Component {
     }
 
     render() {
-        const { headerBar, headerFull, commentsBar, newsFeed, page} = this.state
+        const { headerBar, headerFull, commentsBar, newsFeed, page, meta} = this.state
 
         return (
             <>

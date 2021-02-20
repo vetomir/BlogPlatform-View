@@ -1,23 +1,21 @@
 import {Component} from "react";
 import styled from "styled-components";
 import {colors} from "../../components/utils/Colors";
-import AuthService from "../../controllers/AuthService";
 import PostService from "../../controllers/PostService";
 import CommentService from "../../controllers/CommentService";
 import DocumentMeta from "react-document-meta";
-import PostModuleBar from "../../components/modules/postModuleBar/PostModuleBar";
-import Header from "../../components/modules/header/Header";
-import CommentBar from "../../components/modules/commentBar/CommentBar";
-import PostFeed from "../../components/modules/postfeed/PostFeed";
-import {Pagination} from "../../components/utils/Pagination";
+
 import {Link} from "react-router-dom";
 import Lightbox from "react-image-lightbox";
 import PostModuleSmall from "../../components/modules/postModuleSmall/PostModuleSmall";
 import {validComment} from "../../components/utils/Validations";
 import PostModuleBig from "../../components/modules/postModuleBig/PostModuleBig";
-import PostSingle from "../../components/modules/postSingle/PostSingle";
 import {CommentAddForm} from "../../components/form/CommentAddForm";
 import CommentFeed from "../../components/modules/commentFeed/CommentFeed";
+import {PostSingle} from "../../components/modules/postSingle/PostSingle";
+import {TextareaWhite} from "../../components/form/FormItems";
+import {AnimationLoadingPostSingleWrapper, AnimationLoadingWrapper} from "../../components/utils/Loading";
+import {NoContent} from "../../components/utils/Alerts";
 
 const DarkBg = styled.div`
   background: ${colors.black};
@@ -36,36 +34,44 @@ const Wrapper = styled.div`
   width: 1200px;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
 `;
-
 const Row = styled.div`
-  display: flex;  
+  display: flex;
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
 `;
 const Left = styled.div`
   width: calc(70% - .5rem);
+  position: relative;
+  min-height: 70vh;
+  margin-right: 1rem;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 const Right = styled.div`
   width: calc(30% - .5rem);
+  position: relative;
+  min-height: 70vh;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 
 const Module = styled.div`
-  margin: 1rem;
+  margin: 1rem 0 1rem 1rem;
   position: relative;
-`;
-const NoContent = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  p{
-    font-size: 1rem;
-    color: ${colors.lightGray};
+  @media screen and (max-width: 1200px) {
+    margin: 1rem;
   }
 `;
 const meta = {
     title: ': Home Page',
-    description: 'I am a description, and I can create multiple tags',
+    description: 'esrdtyuyiuoreewwt',
     canonical: '/',
     meta: {
         charset: 'utf-8',
@@ -81,7 +87,7 @@ class PostPage extends Component {
         this.state = {
             /**/
             post: {
-                id : '',
+                id : 0,
                 title : '',
                 lead : '',
                 content : '',
@@ -109,7 +115,6 @@ class PostPage extends Component {
                 postId: ''
             },
             /**/
-            headerBar:[],
             moduleBig: [],
             moduleSmall: [],
             /**/
@@ -117,7 +122,7 @@ class PostPage extends Component {
             userReady: false,
             /**/
             meta: {
-                title: ': ',
+                title: 'Loading... | blogs.',
                 description: 'I am a description, and I can create multiple tags',
                 canonical: '/posts?id=',
                 meta: {
@@ -139,7 +144,6 @@ class PostPage extends Component {
 
         //
 
-        this.headerBar()
         this.getPost()
         this.postModuleBig()
         this.postModuleSmall()
@@ -149,26 +153,16 @@ class PostPage extends Component {
 
         PostService.getSingle(this.state.id).then(
             response => {
+                const post = response.data
                 this.setState({
-                    post: response.data
+                    post: post
                 });
-            },
-            error => {
                 this.setState({
-                    error:
-                        (error.response && error.response.data) ||
-                        error.message ||
-                        error.toString()
-                });
-            }
-        );
-    }
 
-    headerBar(){
-        PostService.getAll(null, null, null, null, 4).then(
-            response => {
-                this.setState({
-                    headerBar: response.data
+                    meta: {
+                        ...this.state.meta,
+                        title: post.title + " | blogs.",
+                    }
                 });
             },
             error => {
@@ -244,71 +238,110 @@ class PostPage extends Component {
     }
 
     render() {
-        const { post, headerBar, moduleSmall, moduleBig, newComment, isOpen } = this.state
+        const { post, moduleSmall, moduleBig, newComment, isOpen ,meta} = this.state
 
         return (
             <>
                 <DocumentMeta {...meta} />
                 <DarkBg>
                     <Wrapper>
-                        <Module>
-                            <PostModuleBar posts={headerBar}/>
-                        </Module>
                         <Row>
                             <Left>
-                                <Module>
-                                    <PostSingle post={post}/>
-                                </Module>
+                                {post.id !== 0 ? (
+                                    <Module>
+                                        <PostSingle>
+                                            <div className='Top' onClick={() => this.setState({isOpen: true})} >
+                                                <img
+                                                    src={post.photoUrl}
+                                                    alt={post.id}
+                                                />
+                                                <div className='Content'>
+                                                    <Link to={'/'} className='Category'>{post.category.name}</Link>
+                                                    <h1 className='Title'>{post.title}</h1>
+                                                    <div className='Author'>
+                                                        <Link to={`/profile?user=${post.author.nickname}`}>{post.author.nickname}</Link>
+                                                        <p> on {post.createdOn}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className='Text'>
+                                                <h3 className='Lead'>
+                                                    <div dangerouslySetInnerHTML={{__html : post.lead}}/>
+                                                </h3>
+                                                <div className='Content'>
+                                                    <div dangerouslySetInnerHTML={{__html : post.content}}/>
+                                                </div>
+                                            </div>
+                                        </PostSingle>
+                                    </Module>
+                                ) : (
+                                    <AnimationLoadingPostSingleWrapper>
+                                        <div><h1/><p/></div><h1/><h1/><h1/><p/><p/><p/><p/><p/>
+                                    </AnimationLoadingPostSingleWrapper>
+                                )}
+
+
                             </Left>
                             <Right>
-                                <Module>
-                                    <PostModuleBig posts={moduleBig}/>
-                                </Module>
+                                {post.id !== 0 ? (
+                                    <Module>
+                                        <PostModuleBig posts={moduleBig}/>
+                                    </Module>
+                                ) : (
+                                    <AnimationLoadingWrapper/>
+                                )}
                             </Right>
                         </Row>
                     </Wrapper>
-                    {isOpen && (
-                        <Lightbox
-                            mainSrc={post.photoUrl}
-                            onCloseRequest={() => this.setState({isOpen: false})}
-                        />
-                    )}
                 </DarkBg>
-                <LightBg>
-                    <Wrapper>
-                        <Left>
-                            <Module>
-                                <CommentAddForm>
-                                    <textarea
-                                        name='content'
-                                        placeholder='Add comment...'
-                                        value={newComment.content}
-                                        onChange={this.onChangeAddComment}
-                                    />
-                                    {newComment.content.length > 0 ? (
-                                        <p>{validComment(newComment.content)}</p>
-                                    ) : (<></>)}
-                                    <button onClick={this.addComment} type="button">Submit</button>
-                                </CommentAddForm>
-                            </Module>
-                            {post.comments.length > 0 ? (
-                                <Module>
-                                    <CommentFeed comments={post.comments}/>
+                {post.id !== 0 ? (
+                    <LightBg>
+                        <Wrapper>
+                            <Row>
+                                <Left>
+                                    <Module>
+                                        <CommentAddForm>
+                                            <TextareaWhite
+                                                name='content'
+                                                placeholder='Add comment...'
+                                                value={newComment.content}
+                                                onChange={this.onChangeAddComment}
+                                            />
+                                            {newComment.content.length > 0 ? (
+                                                <p>{validComment(newComment.content)}</p>
+                                            ) : (<></>)}
+                                            <button onClick={this.addComment} type="button">Submit</button>
+                                        </CommentAddForm>
+                                    </Module>
+                                    {post.comments.length > 0 ? (
+                                        <Module>
+                                            <CommentFeed comments={post.comments}/>
 
-                                </Module>
-                            ) : (
-                                <NoContent>
-                                    <p>No comments</p>
-                                </NoContent>
-                            )}
-                        </Left>
-                        <Right>
-                            <Module>
-                                <PostModuleSmall posts={moduleSmall}/>
-                            </Module>
-                        </Right>
-                    </Wrapper>
-                </LightBg>
+                                        </Module>
+                                    ) : (
+                                        <NoContent>
+                                            <p>No comments</p>
+                                        </NoContent>
+                                    )}
+                                </Left>
+                                <Right>
+                                    <Module>
+                                        <PostModuleSmall posts={moduleSmall}/>
+                                    </Module>
+                                </Right>
+                            </Row>
+                        </Wrapper>
+                    </LightBg>
+                ) : (
+                    <></>
+                )}
+
+                {isOpen && (
+                    <Lightbox
+                        mainSrc={post.photoUrl}
+                        onCloseRequest={() => this.setState({isOpen: false})}
+                    />
+                )}
             </>
         )
     }

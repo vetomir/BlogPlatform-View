@@ -17,7 +17,11 @@ export class PostFeedItems extends Component {
                     src={post.photoUrl}
                 />
                 <div className='Content'>
-                    <div className='Category'>{post.category.name}</div>
+                    {post.category.name !== 'Uncategorized' ? (
+                        <div className='Category'>{post.category.name}</div>
+                    ):(
+                        <></>
+                    )}
                     <p className='Author'>
                         {post.author.nickname} on {post.createdOn}
                     </p>

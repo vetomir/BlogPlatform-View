@@ -28,18 +28,8 @@ class AuthService {
         window.location.reload()
     }
 
-    register(username, nickname, password, passwordRepeat, name, surname) {
-        return UserService.register(
-            {
-                username,
-                nickname,
-                password,
-                passwordRepeat,
-                name,
-                surname
-            }
-        )
-
+    register(body) {
+        return UserService.register(body)
     }
 
 

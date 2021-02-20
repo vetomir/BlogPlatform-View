@@ -1,10 +1,9 @@
-import {Link} from "react-router-dom";
 import {BiComment} from "react-icons/bi";
 
 export function PostModuleBigItem({post}) {
     return (
         <>
-            <a to={`/posts?id=${post.id}`} className='Post' key={"header " + post.id}>
+            <a href={`/posts?id=${post.id}`} className='Post' key={"header " + post.id}>
                 <img
                     alt={post.title + ": article"}
                     className='Image'

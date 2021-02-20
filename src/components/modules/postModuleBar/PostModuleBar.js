@@ -3,7 +3,7 @@ import PostModuleBarItems from "./PostModuleBarItems";
 import styled from "styled-components";
 import {colors} from "../../utils/Colors";
 import {PostEntity} from "../../../controllers/entities/PostEntity";
-import {AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
+import {AnimationLoadingHeaderBarWrapper, AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
 
 const Wrapper = styled.ul`
   animation: ${ModuleShowUp} 2000ms;
@@ -20,6 +20,9 @@ const Wrapper = styled.ul`
     justify-content: space-between;
     padding-right: 1rem;
     overflow: hidden;
+    @media screen and (max-width: 1000px) {
+      height: 100px;
+    }
     &:focus, &:hover, &:visited, &:link, &:active {
       text-decoration: none;
     }
@@ -63,6 +66,9 @@ const Wrapper = styled.ul`
       .Lead{
         color: ${colors.lightGray};
         margin: 0;
+        @media screen and (max-width: 1000px) {
+          display: none;
+        }
       }
     }
   }
@@ -76,6 +82,7 @@ class PostModuleBar extends Component {
     }
     render() {
         const posts = this.props.posts
+
         return (
             <Wrapper>
                 {posts.length !== 0 ? (
@@ -87,10 +94,13 @@ class PostModuleBar extends Component {
                         )}
                     </>
                 ) : (
-                    <AnimationLoadingWrapper/>
+                    <AnimationLoadingHeaderBarWrapper>
+                        <div/>
+                        <div/>
+                        <div/>
+                        <div/>
+                    </AnimationLoadingHeaderBarWrapper>
                 )}
-
-
             </Wrapper>
         )
     }

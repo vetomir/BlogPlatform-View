@@ -1,19 +1,44 @@
 import {Component} from "react";
+import styled, {keyframes} from "styled-components";
+import {colors} from "../utils/Colors";
 
-class LoginForm extends Component {
-    constructor(props) {
-        super(props)
-    }
-    componentDidMount() {
+const appear = keyframes`
+  from {
+    opacity: .2;
+  }
 
+  to {
+    opacity: 1;
+  }
+`;
+export const LoginForm = styled.div`
+  animation: ${appear} 1s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 1200px;
+  padding: 10rem;
+  margin: 0 auto;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+  .Form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 2rem 1rem 1rem 1rem;
+    label{
+      color: ${colors.white};
+      margin: 1rem 0 0 0;
     }
-    render() {
-
-        return (
-            <>
-                Login Form
-            </>
-        )
+    Input{
+      text-align: center;
     }
-}
-export default LoginForm;
+    Button{
+      margin-top: 2rem;
+    }
+  }
+`;

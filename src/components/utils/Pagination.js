@@ -42,3 +42,15 @@ export function Pagination({page , feed}){
         </Pages>
     )
 }
+export function PaginationSearch({page , feed , query}){
+    return (
+        <Pages>
+            {page > 0 ? (
+                <a className='Arrow' href={`/search?query=` + query + `&page=` + (page - 1)}><AiOutlineLeft/> Previous</a>
+            ) : (<></>) }
+            {feed.length === 10 ? (
+                <a className='Arrow' href={`/search?query=` + query + `&page=` + (page + 1)}>Next <AiOutlineRight/></a>
+            ) : (<></>) }
+        </Pages>
+    )
+}
