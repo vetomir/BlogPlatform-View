@@ -16,6 +16,38 @@ import AdminPage from "./pages/adminPage";
 import TopBar from "./components/topBar/TopBar";
 import Footer from "./components/footer/Footer";
 
+function App() {
+  return (
+      <>
+          <GlobalStyle/>
+          {/**/}
+          <Router>
+              <TopBar/>
+              {/**/}
+              <Switch>
+                  <Route path='/' exact component={HomePage}/>
+                  {/**/}
+                  <Route path='/login' exact component={LoginPage}/>
+                  <Route path='/register' exact component={RegisterPage}/>
+                  <Route path='/profile' exact component={UserPage}/>
+                  <Route path='/profile/my' exact component={AuthorizedUserPage}/>
+                  <Route path='/admin' exact component={AdminPage}/>
+                  {/**/}
+                  <Route path='/search' exact component={SearchPage}/>
+                  <Route path='/posts' exact component={PostPage}/>
+                  <Route path='/add-post' exact component={PostCreatePage}/>
+                  <Route path='/posts/edit' exact component={PostEditPage}/>
+                  <Route path='/comments/edit' exact component={CommentEditPage}/>
+              </Switch>
+          </Router>
+          {/**/}
+          <Footer/>
+      </>
+  );
+}
+export default App;
+
+
 const GlobalStyle = createGlobalStyle`
   body{
     padding: 0;
@@ -52,36 +84,3 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 `;
-
-function App() {
-  return (
-      <>
-          <title>Siemanko</title>
-          <GlobalStyle/>
-
-          <Router>
-              <TopBar/>
-
-              <Switch>
-                  <Route path='/' exact component={HomePage}/>
-                  {/**/}
-                  <Route path='/login' exact component={LoginPage}/>
-                  <Route path='/register' exact component={RegisterPage}/>
-                  <Route path='/profile' exact component={UserPage}/>
-                  <Route path='/profile/my' exact component={AuthorizedUserPage}/>
-                  <Route path='/admin' exact component={AdminPage}/>
-                  {/**/}
-                  <Route path='/search' exact component={SearchPage}/>
-                  <Route path='/posts' exact component={PostPage}/>
-                  <Route path='/add-post' exact component={PostCreatePage}/>
-                  <Route path='/posts/edit' exact component={PostEditPage}/>
-                  <Route path='/comments/edit' exact component={CommentEditPage}/>
-              </Switch>
-          </Router>
-
-          <Footer/>
-      </>
-  );
-}
-
-export default App;

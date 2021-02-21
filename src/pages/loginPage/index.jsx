@@ -36,7 +36,7 @@ class LoginPage extends Component {
         /**/
     }
     login = async() =>{
-        AuthService.login(this.state.user.username, this.state.user.password).then(
+        await AuthService.login(this.state.user.username, this.state.user.password).then(
             () => {
                 this.setState({
                     redirect: "/"
@@ -79,7 +79,7 @@ class LoginPage extends Component {
                         placeholder='*'
                         value={user.username}
                         onChange={this.onChange}
-                        type='text'
+                        type='email'
                     />
                     <label>Password</label>
                     <Input

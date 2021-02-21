@@ -5,6 +5,31 @@ import {fonts} from "../../utils/Fonts";
 import {colors} from "../../utils/Colors";
 import {PostModuleSmallItem} from "./PostModuleSmallItems";
 
+class PostModuleSmall extends Component {
+    state = {
+        posts: [
+            PostEntity
+        ],
+        error: ""
+    }
+
+
+    render() {
+        const posts = this.props.posts
+
+        return (
+            <Wrapper>
+                {posts.map( post =>
+                    <PostModuleSmallItem post={post}/>
+                )}
+
+            </Wrapper>
+        )
+    }
+
+}
+export default PostModuleSmall;
+
 const Wrapper = styled.div`
   margin: 1rem 0;
   width: 100%;
@@ -15,7 +40,6 @@ const Wrapper = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
   }
-
   .Post {
     text-decoration: none;
     display: flex;
@@ -42,7 +66,6 @@ const Wrapper = styled.div`
         }
       }
     }
-    
     img{
       width: 5rem;
       height: 5rem;
@@ -65,33 +88,5 @@ const Wrapper = styled.div`
         font-size: .8rem;
       }
     }
-    
-    
   }
-
 `;
-
-class PostModuleSmall extends Component {
-    state = {
-        posts: [
-            PostEntity
-        ],
-        error: ""
-    }
-
-
-    render() {
-        const posts = this.props.posts
-
-        return (
-            <Wrapper>
-                {posts.map( post =>
-                    <PostModuleSmallItem post={post}/>
-                )}
-
-            </Wrapper>
-        )
-    }
-
-}
-export default PostModuleSmall;

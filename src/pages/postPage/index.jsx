@@ -17,69 +17,6 @@ import {TextareaWhite} from "../../components/form/FormItems";
 import {AnimationLoadingPostSingleWrapper, AnimationLoadingWrapper} from "../../components/utils/Loading";
 import {NoContent} from "../../components/utils/Alerts";
 
-const DarkBg = styled.div`
-  background: ${colors.black};
-  width: 100%;
-  height: auto;
-`;
-
-const LightBg = styled.div`
-  background: ${colors.lighterGray};
-  width: 100%;
-  height: auto;
-`;
-
-const Wrapper = styled.div`
-  margin: 0 auto;
-  width: 1200px;
-  display: flex;
-  flex-direction: column;
-  @media screen and (max-width: 1200px) {
-    width: 100%;
-  }
-`;
-const Row = styled.div`
-  display: flex;
-  @media screen and (max-width: 1200px) {
-    flex-direction: column;
-  }
-`;
-const Left = styled.div`
-  width: calc(70% - .5rem);
-  position: relative;
-  min-height: 70vh;
-  margin-right: 1rem;
-  @media screen and (max-width: 1200px) {
-    width: 100%;
-  }
-`;
-const Right = styled.div`
-  width: calc(30% - .5rem);
-  position: relative;
-  min-height: 70vh;
-  @media screen and (max-width: 1200px) {
-    width: 100%;
-  }
-`;
-
-const Module = styled.div`
-  margin: 1rem 0 1rem 1rem;
-  position: relative;
-  @media screen and (max-width: 1200px) {
-    margin: 1rem;
-  }
-`;
-const meta = {
-    title: ': Home Page',
-    description: 'esrdtyuyiuoreewwt',
-    canonical: '/',
-    meta: {
-        charset: 'utf-8',
-        name: {
-            keywords: 'react,meta,document,html,tags'
-        }
-    }
-};
 class PostPage extends Component {
     constructor(props) {
         super(props)
@@ -348,3 +285,56 @@ class PostPage extends Component {
 }
 export default PostPage;
 
+
+const DarkBg = styled.div`
+  background: ${colors.black};
+  width: 100%;
+  height: auto;
+`;
+
+const LightBg = styled.div`
+  background: ${colors.lighterGray};
+  width: 100%;
+  height: auto;
+`;
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+`;
+const Row = styled.div`
+  display: flex;
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
+`;
+const Left = styled.div`
+  width: calc(70% - .5rem);
+  position: relative;
+  min-height: 70vh;
+  margin-right: 1rem;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+`;
+const Right = styled.div`
+  width: calc(30% - .5rem);
+  position: relative;
+  min-height: 70vh;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+`;
+
+const Module = styled.div`
+  margin: 1rem 0 1rem 1rem;
+  position: relative;
+  @media screen and (max-width: 1200px) {
+    margin: 1rem;
+  }
+`;

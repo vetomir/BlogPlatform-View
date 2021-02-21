@@ -1,12 +1,45 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 import React, {useState} from "react";
-import {FaBars} from "react-icons/fa";
-import {AiOutlineClose} from "react-icons/ai";
 import {NavigationData} from "../../controllers/data/NavigationData";
 import {colors} from "../utils/Colors";
 import {CgCloseR} from "react-icons/cg";
 import {RiMenu4Line} from "react-icons/ri";
+
+function Navigation(){
+    const [sidebar, setSidebar] = useState(false)
+    const showSidebar = () => setSidebar(!sidebar)
+
+    return(
+        <Wrapper>
+            <div className='navbar'>
+                <Link to="#" className='menu-bars'>
+                    <RiMenu4Line onClick={showSidebar}/>
+                </Link>
+            </div>
+            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
+                <ul className='nav-menu-items' onClick={showSidebar}>
+                    <li className='navbar-toggle'>
+                        <Link to='#' className='menu-bars'>
+                            <CgCloseR/>
+                        </Link>
+                    </li>
+                    {NavigationData.map((item, index) => {
+                        return (
+                            <li key={index} className={item.cName}>
+                                <Link to={item.path}>
+                                    <span>{item.title}</span>
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </nav>
+        </Wrapper>
+    )
+}
+export default Navigation;
+
 
 const Wrapper = styled.div`
       .navbar {
@@ -82,37 +115,3 @@ const Wrapper = styled.div`
         align-items: center;
       }
 `;
-
-function Navigation(){
-    const [sidebar, setSidebar] = useState(false)
-    const showSidebar = () => setSidebar(!sidebar)
-
-    return(
-        <Wrapper>
-            <div className='navbar'>
-                <Link to="#" className='menu-bars'>
-                    <RiMenu4Line onClick={showSidebar}/>
-                </Link>
-            </div>
-            <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
-                <ul className='nav-menu-items' onClick={showSidebar}>
-                    <li className='navbar-toggle'>
-                        <Link to='#' className='menu-bars'>
-                            <CgCloseR/>
-                        </Link>
-                    </li>
-                    {NavigationData.map((item, index) => {
-                        return (
-                            <li key={index} className={item.cName}>
-                                <Link to={item.path}>
-                                    <span>{item.title}</span>
-                                </Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </nav>
-        </Wrapper>
-    )
-}
-export default Navigation;

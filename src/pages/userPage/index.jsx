@@ -3,8 +3,92 @@ import UserService from "../../controllers/UserService";
 import {UserEntity} from "../../controllers/entities/UserEntity";
 import styled from "styled-components";
 import {colors} from "../../components/utils/Colors";
-import PostFeed from "../../components/modules/postfeed/PostFeed";
 import PostFeedBig from "../../components/modules/postfeedBig/PostFeedBig";
+import AuthService from "../../controllers/AuthService";
+
+class UserPage extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            user: UserEntity
+        }
+    }
+    componentDidMount() {
+        let page = new URLSearchParams(this.props.location.search).get("page")
+        if(page > 0){
+            // eslint-disable-next-line react/no-direct-mutation-state
+            this.state.page = page
+        }
+        let nickname = new URLSearchParams(this.props.location.search).get("user")
+        // eslint-disable-next-line react/no-direct-mutation-state
+        this.state.nickname = nickname
+
+        this.getUser()
+    }
+    getUser = async() => {
+        await UserService.getSingle( this.state.nickname ).then(
+            response => {
+                this.setState({
+                    user: response.data
+                });
+            },
+            error => {
+                this.setState({
+                    error:
+                        (error.response && error.response.data) ||
+                        error.message ||
+                        error.toString()
+                });
+            }
+        );
+    }
+    render() {
+        const {user} = this.state
+        return (
+            <>
+                <DarkBg>
+                    <Wrapper>
+                        <Profile>
+                            <User>
+                                <div className='Photo'>
+                                    <img alt={user.nickname} src={user.photoUrl}/>
+                                </div>
+                                <div className='Details'>
+                                    <div className='Nickname'>
+                                        <p>{user.nickname}</p>
+                                    </div>
+                                    <div className='FullName'>
+                                        <h1>{user.name}</h1>
+                                        <h1>{user.surname}</h1>
+                                    </div>
+                                </div>
+                            </User>
+                            <Stats>
+                                <div>
+                                    <h1>{user.posts.length}</h1>
+                                    <p>Posts</p>
+                                </div>
+                                <div>
+                                    <h1>{user.comments.length}</h1>
+                                    <p>Comments</p>
+                                </div>
+                            </Stats>
+                        </Profile>
+
+
+                    </Wrapper>
+                </DarkBg>
+                <LightBg>
+                    <Wrapper>
+                       <PostFeedBig posts={user.posts}/>
+                    </Wrapper>
+                </LightBg>
+            </>
+        )
+    }
+}
+export default UserPage;
+
 
 const DarkBg = styled.div`
   background: ${colors.black};
@@ -81,86 +165,3 @@ const Stats = styled.div`
     border-radius: 10px;
   }
 `;
-class UserPage extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            user: UserEntity
-        }
-    }
-    componentDidMount() {
-        let page = new URLSearchParams(this.props.location.search).get("page")
-        if(page > 0){
-            // eslint-disable-next-line react/no-direct-mutation-state
-            this.state.page = page
-        }
-        let nickname = new URLSearchParams(this.props.location.search).get("user")
-        // eslint-disable-next-line react/no-direct-mutation-state
-        this.state.nickname = nickname
-
-        this.getUser()
-    }
-    getUser = () => {
-        UserService.getSingle( this.state.nickname ).then(
-            response => {
-                this.setState({
-                    user: response.data
-                });
-            },
-            error => {
-                this.setState({
-                    error:
-                        (error.response && error.response.data) ||
-                        error.message ||
-                        error.toString()
-                });
-            }
-        );
-    }
-    render() {
-        const {user} = this.state
-        console.log(user)
-        return (
-            <>
-                <DarkBg>
-                    <Wrapper>
-                        <Profile>
-                            <User>
-                                <div className='Photo'>
-                                    <img alt={user.nickname} src={user.photoUrl}/>
-                                </div>
-                                <div className='Details'>
-                                    <div className='Nickname'>
-                                        <p>{user.nickname}</p>
-                                    </div>
-                                    <div className='FullName'>
-                                        <h1>{user.name}</h1>
-                                        <h1>{user.surname}</h1>
-                                    </div>
-                                </div>
-                            </User>
-                            <Stats>
-                                <div>
-                                    <h1>{user.posts.length}</h1>
-                                    <p>Posts</p>
-                                </div>
-                                <div>
-                                    <h1>{user.comments.length}</h1>
-                                    <p>Comments</p>
-                                </div>
-                            </Stats>
-                        </Profile>
-
-
-                    </Wrapper>
-                </DarkBg>
-                <LightBg>
-                    <Wrapper>
-                       <PostFeedBig posts={user.posts}/>
-                    </Wrapper>
-                </LightBg>
-            </>
-        )
-    }
-}
-export default UserPage;

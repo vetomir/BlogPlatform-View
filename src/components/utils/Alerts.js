@@ -2,6 +2,22 @@ import styled, {keyframes} from "styled-components";
 import {colors} from "./Colors";
 import {BiError} from "react-icons/bi";
 
+export function AlertServer({error}){
+    return (
+        <AlertServerWrapper>
+            {error ? (
+                error.messages.map( e =>
+                    <li>
+                        <BiError/> {e}
+                    </li>
+                )
+            ) : (
+                <></>
+            )}
+        </AlertServerWrapper>
+    )
+}
+
 const light = keyframes`
   0%{
     box-shadow: 0 0 5px ${colors.black};
@@ -16,7 +32,8 @@ const light = keyframes`
 `
 
 export const AlertServerWrapper = styled.ul`
-  position: absolute;
+  position: fixed;
+  z-index: 999;
   bottom: 1rem;
   right: 1rem;
   li{
@@ -37,22 +54,7 @@ export const AlertServerWrapper = styled.ul`
     }
   }
 `
-export function AlertServer({error}){
-    return (
-        <AlertServerWrapper>
-            {error ? (
-                error.messages.map( e =>
-                    <li>
-                        <BiError/> {e}
-                    </li>
-                )
-            ) : (
-                <></>
-            )}
-        </AlertServerWrapper>
-    )
-}
-
+/**/
 export const NoContent = styled.div`
   display: flex;
   width: 100%;

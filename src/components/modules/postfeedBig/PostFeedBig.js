@@ -4,9 +4,25 @@ import {colors} from "../../utils/Colors";
 import {fonts} from "../../utils/Fonts";
 import {PostFeedBigItems} from "./PostFeedBigItems";
 import {PostEntity} from "../../../controllers/entities/PostEntity";
-import {ModuleShowUp} from "../../utils/Loading";
-const Wrapper = styled.div`
 
+class PostFeedBig extends Component {
+    state = {
+        posts: [
+            PostEntity
+        ]
+    }
+    render() {
+        const posts = this.props.posts
+        return (
+            <Wrapper>
+                {posts.map(post => <PostFeedBigItems post={post}/>)}
+            </Wrapper>
+        )
+    }
+}
+export default PostFeedBig;
+
+const Wrapper = styled.div`
   margin: -6rem 0 0 0;
   width: 100%;
   height: auto;
@@ -14,7 +30,6 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-
   .Post{
     position: relative;
     width: 100%;
@@ -60,12 +75,10 @@ const Wrapper = styled.div`
     &:focus, &:hover, &:visited, &:link, &:active {
       text-decoration: none;
     }
-
     .Image{
       width: 50%;
       height: auto;
       object-fit: cover;
-
     }
     .Content{
       width: 50%;
@@ -125,20 +138,3 @@ const Wrapper = styled.div`
     }
   }
 `;
-
-class PostFeedBig extends Component {
-    state = {
-        posts: [
-            PostEntity
-        ]
-    }
-    render() {
-        const posts = this.props.posts
-        return (
-            <Wrapper>
-                {posts.map(post => <PostFeedBigItems post={post}/>)}
-            </Wrapper>
-        )
-    }
-}
-export default PostFeedBig;

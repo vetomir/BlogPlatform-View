@@ -5,6 +5,9 @@ import UserService from "./UserService";
 const URL = API_URL + '/authenticate';
 
 class AuthService {
+    getServerStatus() {
+        return axios.get(API_URL + `/status`);
+    }
 
     login(username, password) {
         return axios

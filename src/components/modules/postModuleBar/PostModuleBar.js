@@ -3,7 +3,37 @@ import PostModuleBarItems from "./PostModuleBarItems";
 import styled from "styled-components";
 import {colors} from "../../utils/Colors";
 import {PostEntity} from "../../../controllers/entities/PostEntity";
-import {AnimationLoadingHeaderBarWrapper, AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
+import {AnimationLoadingHeaderBarWrapper, ModuleShowUp} from "../../utils/Loading";
+
+class PostModuleBar extends Component {
+    state = {
+        posts: [
+            PostEntity
+        ]
+    }
+    render() {
+        const posts = this.props.posts
+
+        return (
+            <Wrapper>
+                {posts.length !== 0 ? (
+                    <>
+                        {posts.map(
+                            post =>
+                                <PostModuleBarItems post={post}/>
+
+                        )}
+                    </>
+                ) : (
+                    <AnimationLoadingHeaderBarWrapper>
+                        <div/><div/><div/><div/>
+                    </AnimationLoadingHeaderBarWrapper>
+                )}
+            </Wrapper>
+        )
+    }
+}
+export default PostModuleBar;
 
 const Wrapper = styled.ul`
   animation: ${ModuleShowUp} 2000ms;
@@ -42,7 +72,6 @@ const Wrapper = styled.ul`
           color: ${colors.black};
           transition: 350ms;
         }
-        
       }
     }
     .Image{
@@ -73,36 +102,3 @@ const Wrapper = styled.ul`
     }
   }
 `;
-
-class PostModuleBar extends Component {
-    state = {
-        posts: [
-            PostEntity
-        ]
-    }
-    render() {
-        const posts = this.props.posts
-
-        return (
-            <Wrapper>
-                {posts.length !== 0 ? (
-                    <>
-                        {posts.map(
-                            post =>
-                                <PostModuleBarItems post={post}/>
-
-                        )}
-                    </>
-                ) : (
-                    <AnimationLoadingHeaderBarWrapper>
-                        <div/>
-                        <div/>
-                        <div/>
-                        <div/>
-                    </AnimationLoadingHeaderBarWrapper>
-                )}
-            </Wrapper>
-        )
-    }
-}
-export default PostModuleBar;

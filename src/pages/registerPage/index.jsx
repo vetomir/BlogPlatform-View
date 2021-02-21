@@ -42,7 +42,7 @@ class RegisterPage extends Component {
         /**/
     }
     register = async() =>{
-        AuthService.register(this.state.newUser).then(
+        await AuthService.register(this.state.newUser).then(
             response => {
                 console.log(this.state.newUser)
                 console.log(response)

@@ -2,7 +2,7 @@ import {Component} from "react";
 import PostService from "../../controllers/PostService";
 import AuthService from "../../controllers/AuthService";
 import {Pagination} from "../../components/utils/Pagination";
-import styled, {keyframes} from "styled-components"
+import styled from "styled-components"
 import Header from "../../components/modules/header/Header";
 import PostModuleBar from "../../components/modules/postModuleBar/PostModuleBar";
 import CommentBar from "../../components/modules/commentBar/CommentBar";
@@ -10,32 +10,8 @@ import CommentService from "../../controllers/CommentService";
 import PostFeed from "../../components/modules/postfeed/PostFeed";
 import {colors} from "../../components/utils/Colors";
 import DocumentMeta from 'react-document-meta';
+import {getStatus} from "../../controllers/Config";
 
-const DarkBg = styled.div`
-  background: ${colors.black};
-  width: 100%;
-  height: auto;
-`;
-
-const LightBg = styled.div`
-  background: ${colors.lighterGray};
-  width: 100%;
-  height: auto;
-`;
-
-const Wrapper = styled.div`
-  margin: 0 auto;
-  width: 1200px;
-  display: flex;
-  flex-direction: column;
-  @media screen and (max-width: 1200px) {
-    width: 100%;
-  }
-`;
-const Module = styled.div`
-  margin: 1rem;
-  position: relative;
-`;
 class HomePage extends Component {
     constructor(props) {
         super(props)
@@ -71,11 +47,26 @@ class HomePage extends Component {
         this.newsFeed()
         this.headerBar()
         this.commentsBar()
+        this.getServerStatus()
 
     }
 
+    getServerStatus = async() =>{
+        await AuthService.getServerStatus().then(
+            response => {
+                console.log(response.data)
+            },
+            error => {
+                this.setState({
+                    userReady: false
+                });
+            }
+        );
+    }
+
+
     checkUser = async() =>{
-        AuthService.getCurrentUser().then(
+        await AuthService.getCurrentUser().then(
             response => {
                 this.setState({
                     currentUser: response.data,
@@ -91,7 +82,7 @@ class HomePage extends Component {
         );
     }
     headerBar = async() => {
-        PostService.getAll(null, null, null, null, 4).then(
+        await PostService.getAll(null, null, null, null, 4).then(
             response => {
                 this.setState({
                     headerBar: response.data
@@ -109,7 +100,7 @@ class HomePage extends Component {
     }
 
     header = async() => {
-        PostService.getAll(null, 1, null, 'id', 5).then(
+        await PostService.getAll(null, 1, null, 'id', 5).then(
             response => {
                 this.setState({
                     headerFull: response.data
@@ -126,7 +117,7 @@ class HomePage extends Component {
         );
     }
     commentsBar = async () =>{
-        CommentService.getAll(null, "DESC", null,3).then(
+        await CommentService.getAll(null, "DESC", null,3).then(
             response => {
                 this.setState({
                     commentsBar: response.data
@@ -150,7 +141,7 @@ class HomePage extends Component {
             this.state.page = page
         }
 
-        PostService.getAll(null, this.state.page, null, null, 10).then(
+        await PostService.getAll(null, this.state.page, null, null, 10).then(
             response => {
                 this.setState({
                     newsFeed: response.data
@@ -205,3 +196,30 @@ class HomePage extends Component {
     }
 }
 export default HomePage;
+
+
+const DarkBg = styled.div`
+  background: ${colors.black};
+  width: 100%;
+  height: auto;
+`;
+
+const LightBg = styled.div`
+  background: ${colors.lighterGray};
+  width: 100%;
+  height: auto;
+`;
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+`;
+const Module = styled.div`
+  margin: 1rem;
+  position: relative;
+`;

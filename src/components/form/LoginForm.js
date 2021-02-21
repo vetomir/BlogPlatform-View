@@ -1,4 +1,3 @@
-import {Component} from "react";
 import styled, {keyframes} from "styled-components";
 import {colors} from "../utils/Colors";
 

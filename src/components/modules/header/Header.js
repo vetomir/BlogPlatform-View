@@ -1,12 +1,59 @@
 import {Component} from "react";
 import {HeaderItemBig, HeaderItemSmall} from "./HeaderItems";
 import {PostEntity} from "../../../controllers/entities/PostEntity";
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
 import {colors} from "../../utils/Colors";
 import {fonts} from "../../utils/Fonts";
-import {AnimationLoadingHeaderWrapper, AnimationLoadingWrapper, ModuleShowUp} from "../../utils/Loading";
+import {AnimationLoadingHeaderWrapper, ModuleShowUp} from "../../utils/Loading";
 
+class Header extends Component {
+    state = {
+        posts: [
+            PostEntity
+        ]
+    }
+    render() {
+        const posts = this.props.posts
 
+        let firstPost
+        posts.length ? (
+            firstPost = posts[0]
+        ) : (
+            firstPost = PostEntity
+        )
+        return (
+            <Wrapper>
+                {posts.length !== 0 ? (
+                    <>
+                        <HeaderItemBig post={firstPost}/>
+                        <div className='Items'>
+                            {posts.slice(1).map(
+                                post => <HeaderItemSmall post={post}/>
+                            )}
+                        </div>
+                    </>
+                ) : (
+                    <AnimationLoadingHeaderWrapper>
+                        <div className='big'>
+                            <p/>
+                            <h1/>
+                            <p/>
+                            <h2/>
+                        </div>
+                        <div className='small'>
+                            <div/>
+                            <div/>
+                            <div/>
+                            <div/>
+                        </div>
+                    </AnimationLoadingHeaderWrapper>
+                )}
+            </Wrapper>
+        )
+    }
+}
+
+export default Header;
 
 const Wrapper = styled.div`
   animation: ${ModuleShowUp} 2000ms;
@@ -29,9 +76,7 @@ const Wrapper = styled.div`
     @media screen and (max-width: 1000px) {
       width: 100%;
     }
-
   }
-
   .Post {
     margin-left: 1rem;
     position: relative;
@@ -64,15 +109,12 @@ const Wrapper = styled.div`
         }
       }
     }
-    
-
     .Image {
       width: 100%;
       height: auto;
       object-fit: cover;
       opacity: .21;
     }
-
     .Content {
       position: absolute;
       left: 0;
@@ -128,7 +170,6 @@ const Wrapper = styled.div`
       }
     }
   }
-
   .FirstPost {
     width: 828px;
     height: 516px;
@@ -161,53 +202,5 @@ const Wrapper = styled.div`
     }
   }
 }
-
 `;
 
-class Header extends Component {
-    state = {
-        posts: [
-            PostEntity
-        ]
-    }
-    render() {
-        const posts = this.props.posts
-
-        let firstPost
-        posts.length ? (
-            firstPost = posts[0]
-        ) : (
-            firstPost = PostEntity
-        )
-        return (
-            <Wrapper>
-                {posts.length !== 0 ? (
-                    <>
-                        <HeaderItemBig post={firstPost}/>
-                        <div className='Items'>
-                            {posts.slice(1).map(
-                                post => <HeaderItemSmall post={post}/>
-                            )}
-                        </div>
-                    </>
-                ) : (
-                    <AnimationLoadingHeaderWrapper>
-                        <div className='big'>
-                            <p/>
-                            <h1/>
-                            <p/>
-                            <h2/>
-                        </div>
-                        <div className='small'>
-                            <div/>
-                            <div/>
-                            <div/>
-                            <div/>
-                        </div>
-                    </AnimationLoadingHeaderWrapper>
-                )}
-            </Wrapper>
-        )
-    }
-}
-export default Header;

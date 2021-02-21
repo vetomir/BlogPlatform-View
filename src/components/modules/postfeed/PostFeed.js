@@ -5,6 +5,24 @@ import {fonts} from "../../utils/Fonts";
 import {PostFeedItems} from "./PostFeedItems";
 import {PostEntity} from "../../../controllers/entities/PostEntity";
 import {ModuleShowUp} from "../../utils/Loading";
+
+class PostFeed extends Component {
+    state = {
+        posts: [
+            PostEntity
+        ]
+    }
+    render() {
+        const posts = this.props.posts
+        return (
+            <Wrapper>
+                {posts.map(post => <PostFeedItems post={post}/>)}
+            </Wrapper>
+        )
+    }
+}
+export default PostFeed;
+
 const Wrapper = styled.div`
   animation: ${ModuleShowUp} 2000ms;
   margin:0;
@@ -14,7 +32,6 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-
   .Post{
     position: relative;
     width: calc(50% - 1rem);
@@ -63,12 +80,10 @@ const Wrapper = styled.div`
     &:focus, &:hover, &:visited, &:link, &:active {
       text-decoration: none;
     }
-
     .Image{
       width: 50%;
       height: auto;
       object-fit: cover;
-
     }
     .Content{
       width: 50%;
@@ -196,20 +211,3 @@ const Wrapper = styled.div`
     }
   }
 `;
-
-class PostFeed extends Component {
-    state = {
-        posts: [
-            PostEntity
-        ]
-    }
-    render() {
-        const posts = this.props.posts
-        return (
-            <Wrapper>
-                {posts.map(post => <PostFeedItems post={post}/>)}
-            </Wrapper>
-        )
-    }
-}
-export default PostFeed;

@@ -5,6 +5,39 @@ import styled from "styled-components";
 import {colors} from "../../utils/Colors";
 import {fonts} from "../../utils/Fonts";
 
+class CommentFeed extends Component {
+    state = {
+        comments: [
+            CommentEntity
+        ],
+        error: ""
+    }
+
+    render() {
+        const comments = this.props.comments
+        return (
+            <Wrapper>
+                {comments.map( comment =>
+                    <li key={comment.id}>
+                        <Link to={`/profile?user=${comment.authorNickname}`} className='Author'>
+                            <img alt={comment.id} src={comment.authorAvatar}/>
+                            <div>
+                                <p className="Name">{comment.authorNickname}</p>
+                                <p className="Date">{comment.createdOn}</p>
+                            </div>
+                        </Link>
+                        <div>
+                            <div dangerouslySetInnerHTML={{__html : comment.content}}/>
+                        </div>
+                    </li>
+                )}
+            </Wrapper>
+        )
+    }
+}
+
+export default CommentFeed;
+
 const Wrapper = styled.ul`
   list-style: none;
   display: flex;
@@ -53,35 +86,3 @@ const Wrapper = styled.ul`
     }
   }
 `;
-
-class CommentFeed extends Component {
-    state = {
-        comments: [
-            CommentEntity
-        ],
-        error: ""
-    }
-
-    render() {
-        const comments = this.props.comments
-        return (
-            <Wrapper>
-                {comments.map( comment =>
-                    <li key={comment.id}>
-                        <Link to={`/profile?user=${comment.authorNickname}`} className='Author'>
-                            <img alt={comment.id} src={comment.authorAvatar}/>
-                            <div>
-                                <p className="Name">{comment.authorNickname}</p>
-                                <p className="Date">{comment.createdOn}</p>
-                            </div>
-                        </Link>
-                        <div>
-                            <div dangerouslySetInnerHTML={{__html : comment.content}}/>
-                        </div>
-                    </li>
-                )}
-            </Wrapper>
-        )
-    }
-}
-export default CommentFeed;

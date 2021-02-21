@@ -15,47 +15,7 @@ import CategoryService from "../../controllers/CategoryService";
 import {Redirect} from "react-router-dom";
 import DocumentMeta from "react-document-meta";
 import {AlertServer} from "../utils/Alerts";
-import {CKEditorConfig, EditorWrapper} from "./CKEditorConfig";
-
-const Wrapper = styled.div`
-  width: 1000px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 5rem 1rem 1rem 1rem;
-  label{
-    color: ${colors.white};
-    line-height: 2rem ;
-  }
-`;
-
-const Top = styled.h1`
-  color: ${colors.orange};
-  font-family: ${fonts.secondary};
-  margin: 1rem 0 2rem 0;
-`;
-const Title = styled.div`
-  width: 100%;
-`;
-const Row = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem;
-`;
-const Left = styled.div`
-  width: calc(70% - .5rem);
-  .Lead{
-    min-height: 150px;
-  }
-  .Content{
-    min-height: 200px;
-  }
-`;
-const Right = styled.div`
-  width: calc(30% - .5rem);
-`;
-
+import {CKEditorConfig} from "./CKEditorConfig";
 
 class PostCreateForm extends Component {
     constructor(props) {
@@ -108,7 +68,7 @@ class PostCreateForm extends Component {
     }
 
     addPost = async() =>{
-        PostService.add(this.state.newPost).then(
+        await PostService.add(this.state.newPost).then(
             response => {
                 console.log(this.state.newPost)
                 console.log(response)
@@ -128,8 +88,8 @@ class PostCreateForm extends Component {
         );
     }
 
-    getUser = () =>{
-        AuthService.getCurrentUser().then(
+    getUser = async () =>{
+        await AuthService.getCurrentUser().then(
             response => {
                 this.setState({
                     currentUser: response.data,
@@ -144,8 +104,8 @@ class PostCreateForm extends Component {
         );
     }
 
-    getCategories = () => {
-        CategoryService.getAllQuery().then(
+    getCategories = async() => {
+        await CategoryService.getAllQuery().then(
             response => {
                 this.setState({
                     categories: response.data
@@ -269,14 +229,14 @@ class PostCreateForm extends Component {
                             type='text'
                         />
                         <label>Content</label>
-                        <EditorWrapper>
+                        <>
                             <CKEditor
                                 name="content"
                                 editor={ClassicEditor}
                                 value={newPost.content}
                                 onChange={this.onChangeContent}
                             />
-                        </EditorWrapper>
+                        </>
                         {newPost.content.length > 0 ? (
                             <p>{validContent(newPost.content)}</p>
                         ) : (<></>)}
@@ -361,3 +321,43 @@ class PostCreateForm extends Component {
     }
 }
 export default PostCreateForm;
+
+const Wrapper = styled.div`
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem 1rem 1rem 1rem;
+  label{
+    color: ${colors.white};
+    line-height: 2rem ;
+  }
+`;
+
+const Top = styled.h1`
+  color: ${colors.orange};
+  font-family: ${fonts.secondary};
+  margin: 1rem 0 2rem 0;
+`;
+const Title = styled.div`
+  width: 100%;
+`;
+const Row = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+`;
+const Left = styled.div`
+  width: calc(70% - .5rem);
+  .Lead{
+    min-height: 150px;
+  }
+  .Content{
+    min-height: 200px;
+  }
+`;
+const Right = styled.div`
+  width: calc(30% - .5rem);
+`;
+

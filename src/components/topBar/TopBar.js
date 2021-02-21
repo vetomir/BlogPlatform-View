@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {Link} from "react-router-dom";
-import styled, {keyframes} from "styled-components";
+import styled from "styled-components";
 import {colors} from "../utils/Colors";
 import {fonts} from "../utils/Fonts";
 import {FaReact, FaSearch} from "react-icons/fa";
@@ -8,8 +8,93 @@ import AuthService from "../../controllers/AuthService";
 import {ButtonLink} from "../utils/Buttons";
 import Navigation from "../navigation/Navigation";
 
+class TopBar extends Component {
+    constructor(props) {
+        super(props)
 
+        this.state = {
+            currentUser: {},
+            userReady: false,
+            searchQuery: ''
+        }
+    }
 
+    logOut = async () => {
+        AuthService.logout();
+    }
+
+    getCurrentUser = async () =>{
+        AuthService.getCurrentUser().then(
+            response => {
+                this.setState({
+                    currentUser: response.data,
+                    userReady: true
+                });
+
+            },
+            error => {
+                this.setState({
+                    userReady: false
+                });
+            }
+        );
+    }
+    componentDidMount() {
+        this.getCurrentUser()
+    }
+
+    onChangeSearchQuery = e => {
+        this.setState({
+            searchQuery: e.target.value
+        });
+    }
+    render() {
+        const { userReady , currentUser, searchQuery } = this.state
+        if(userReady){
+            console.log('Hello ' + currentUser.nickname)
+        }
+
+        return (
+            <>
+                <Navigation/>
+                <Wrapper>
+                    <a href={'/'} className='Logo'><FaReact/>blogs.</a>
+                    <Right>
+                        <Search>
+                            <input
+                                className='Input'
+                                type='text'
+                                name='search'
+                                placeholder='Seach'
+                                value={searchQuery}
+                                onChange={this.onChangeSearchQuery}
+                            />
+                            <a className='submit' href={`/search?query=${searchQuery}`}><FaSearch/></a>
+                        </Search>
+                        {!userReady ? (
+                            <>
+                                <Link to={'/register'} className='Register'>Become a member</Link>
+                                <ButtonLink to={'/login'} className='Login'>Login</ButtonLink>
+                            </>
+                        ):(
+                            <>
+                                <Profile to={'/profile/my'}>
+                                    <img
+                                        className='Avatar'
+                                        src={currentUser.photoUrl}
+                                        alt={currentUser.id}
+                                    />
+                                </Profile>
+                                <ButtonLink to={'/'} onClick={this.logOut} className='Login'>Logout</ButtonLink>
+                            </>
+                        )}
+                    </Right>
+                </Wrapper>
+            </>
+        )
+    }
+}
+export default TopBar;
 
 const Wrapper = styled.div`
   margin: 1rem auto;
@@ -22,7 +107,6 @@ const Wrapper = styled.div`
     width: 100%;  
     padding: 0 1rem 0 5rem;
   }
-  
   .Logo{
     color: ${colors.white};
     font-size: 2rem;
@@ -36,7 +120,6 @@ const Wrapper = styled.div`
         transition: 500ms;
       }
     }
-
   }
   .Register{
     cursor: pointer;
@@ -79,7 +162,6 @@ const Search = styled.div`
   input{
     background: none;
     border: none;
-    
     color: ${colors.orange};
     height: 2rem;
     font-weight: ${fonts.regular};
@@ -112,7 +194,6 @@ const Search = styled.div`
       transition: 500ms;
     }
   }
-
 `;
 const Profile = styled(Link)`
   height: 3rem;
@@ -133,97 +214,3 @@ const Profile = styled(Link)`
     object-fit: cover;
   }
 `;
-
-class TopBar extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            currentUser: {},
-            userReady: false,
-            searchQuery: ''
-        }
-    }
-
-    logOut = async () => {
-        AuthService.logout();
-    }
-
-    checkUser = async () =>{
-        AuthService.getCurrentUser().then(
-            response => {
-                this.setState({
-                    currentUser: response.data,
-                    userReady: true
-                });
-
-            },
-            error => {
-                this.setState({
-                    userReady: false
-                });
-            }
-        );
-    }
-    componentDidMount() {
-        this.checkUser()
-    }
-
-    onChangeSearchQuery = e => {
-        this.setState({
-            searchQuery: e.target.value
-        });
-    }
-    render() {
-        const { userReady , currentUser, searchQuery } = this.state
-        if(userReady){
-            console.log('Hello ' + currentUser.nickname)
-        }
-
-        return (
-            <>
-                <Navigation/>
-                <Wrapper>
-                    <a href={'/'} className='Logo'><FaReact/>blogs.</a>
-                    <Right>
-                        <Search>
-                            <input
-                                className='Input'
-                                type='text'
-                                name='search'
-                                placeholder='Seach'
-                                value={searchQuery}
-                                onChange={this.onChangeSearchQuery}
-                            />
-                            <a className='submit' href={`/search?query=${searchQuery}`}><FaSearch/></a>
-                        </Search>
-
-
-                        {!userReady ? (
-                            <>
-                                <Link to={'/register'} className='Register'>Become a member</Link>
-                                <ButtonLink to={'/login'} className='Login'>Login</ButtonLink>
-                            </>
-
-                        ):(
-                            <>
-                                <Profile to={'/profile/my'}>
-                                    <img
-                                        className='Avatar'
-                                        src={currentUser.photoUrl}
-                                        alt={currentUser.id}
-                                    />
-                                </Profile>
-                                <ButtonLink to={'/'} onClick={this.logOut} className='Login'>Logout</ButtonLink>
-                            </>
-                        )}
-
-
-                    </Right>
-
-                </Wrapper>
-            </>
-        )
-    }
-}
-export default TopBar;

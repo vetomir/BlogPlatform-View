@@ -2,7 +2,6 @@ import React from 'react';
 import styled, {keyframes} from "styled-components";
 import {colors} from "../utils/Colors";
 import {fonts} from "../utils/Fonts";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 export const TextareaWhite = styled.textarea`
   font-size: 1rem;

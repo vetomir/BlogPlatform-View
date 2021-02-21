@@ -5,6 +5,27 @@ import styled from "styled-components";
 import {colors} from "../../utils/Colors";
 import {fonts} from "../../utils/Fonts";
 
+class PostModuleBig extends Component {
+    state = {
+        posts: [
+            PostEntity
+        ],
+        error: ""
+    }
+
+    render() {
+        const posts = this.props.posts
+        return (
+            <Wrapper>
+                {posts.map( post =>
+                    <PostModuleBigItem post={post}/>
+                )}
+            </Wrapper>
+        )
+    }
+}
+export default PostModuleBig;
+
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -98,31 +119,6 @@ const Wrapper = styled.div`
           color: ${colors.orange};
         }
       }
-
     }
-    
-    
   }
-
 `;
-
-class PostModuleBig extends Component {
-    state = {
-        posts: [
-            PostEntity
-        ],
-        error: ""
-    }
-
-    render() {
-        const posts = this.props.posts
-        return (
-            <Wrapper>
-                {posts.map( post =>
-                    <PostModuleBigItem post={post}/>
-                )}
-            </Wrapper>
-        )
-    }
-}
-export default PostModuleBig;

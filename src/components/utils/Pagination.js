@@ -2,7 +2,32 @@ import {AiOutlineLeft, AiOutlineRight} from "react-icons/ai";
 import styled from "styled-components";
 import {colors} from "./Colors";
 import {fonts} from "./Fonts";
-const Pages = styled.div`
+
+export function Pagination({page , feed}){
+    return (
+        <Wrapper>
+            {page > 0 ? (
+                <a className='Arrow' href={`?page=` + (page - 1)}><AiOutlineLeft/> Previous</a>
+            ) : (<></>) }
+            {feed.length === 10 ? (
+                <a className='Arrow' href={`?page=` + (page + 1)}>Next <AiOutlineRight/></a>
+            ) : (<></>) }
+        </Wrapper>
+    )
+}
+export function PaginationSearch({page , feed , query}){
+    return (
+        <Wrapper>
+            {page > 0 ? (
+                <a className='Arrow' href={`/search?query=` + query + `&page=` + (page - 1)}><AiOutlineLeft/> Previous</a>
+            ) : (<></>) }
+            {feed.length === 10 ? (
+                <a className='Arrow' href={`/search?query=` + query + `&page=` + (page + 1)}>Next <AiOutlineRight/></a>
+            ) : (<></>) }
+        </Wrapper>
+    )
+}
+const Wrapper = styled.div`
   padding:1rem;
   width: 100%;
   display: flex;
@@ -29,28 +54,3 @@ const Pages = styled.div`
     }
   }
 `;
-
-export function Pagination({page , feed}){
-    return (
-        <Pages>
-            {page > 0 ? (
-                <a className='Arrow' href={`?page=` + (page - 1)}><AiOutlineLeft/> Previous</a>
-            ) : (<></>) }
-            {feed.length === 10 ? (
-                <a className='Arrow' href={`?page=` + (page + 1)}>Next <AiOutlineRight/></a>
-            ) : (<></>) }
-        </Pages>
-    )
-}
-export function PaginationSearch({page , feed , query}){
-    return (
-        <Pages>
-            {page > 0 ? (
-                <a className='Arrow' href={`/search?query=` + query + `&page=` + (page - 1)}><AiOutlineLeft/> Previous</a>
-            ) : (<></>) }
-            {feed.length === 10 ? (
-                <a className='Arrow' href={`/search?query=` + query + `&page=` + (page + 1)}>Next <AiOutlineRight/></a>
-            ) : (<></>) }
-        </Pages>
-    )
-}

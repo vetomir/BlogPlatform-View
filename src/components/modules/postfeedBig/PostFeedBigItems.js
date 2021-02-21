@@ -1,4 +1,3 @@
-import {BiComment} from "react-icons/bi";
 import React, {Component} from "react";
 import {PostEntity} from "../../../controllers/entities/PostEntity";
 
