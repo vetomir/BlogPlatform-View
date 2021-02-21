@@ -31,13 +31,15 @@ function App() {
                   <Route path='/register' exact component={RegisterPage}/>
                   <Route path='/profile' exact component={UserPage}/>
                   <Route path='/profile/my' exact component={AuthorizedUserPage}/>
-                  <Route path='/admin' exact component={AdminPage}/>
+                  {/*todo*/}
+                  {/*<Route path='/admin' exact component={AdminPage}/>*/}
                   {/**/}
                   <Route path='/search' exact component={SearchPage}/>
                   <Route path='/posts' exact component={PostPage}/>
                   <Route path='/add-post' exact component={PostCreatePage}/>
                   <Route path='/posts/edit' exact component={PostEditPage}/>
-                  <Route path='/comments/edit' exact component={CommentEditPage}/>
+                  {/*todo*/}
+                  {/*<Route path='/comments/edit' exact component={CommentEditPage}/>*/}
               </Switch>
           </Router>
           {/**/}
