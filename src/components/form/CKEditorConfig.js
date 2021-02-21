@@ -1,6 +1,7 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import styled from "styled-components";
 import {colors} from "../utils/Colors";
+import {fonts} from "../utils/Fonts";
 
 export function CKEditorConfig() {
     ClassicEditor.defaultConfig = {
@@ -35,9 +36,22 @@ export function CKEditorConfig() {
 }
 
 export const EditorWrapper = styled.div`
+  .Error{
+    padding: 1rem .5rem;
+    display: flex;
+    width: 100%;
+    background-color: ${colors.orange};
+    transition: 500ms;
+    justify-content: center;
+    div{
+      margin-left: .5rem;
+      font-weight: ${fonts.regular};
+      color: ${colors.black}; 
+    }
+  }
     .ck{
       color: ${colors.gray};
-      background: ${colors.black};
+      background: ${colors.black}!important;
       border: none;
       .ck-toolbar{
         background: none;
@@ -71,6 +85,8 @@ export const EditorWrapper = styled.div`
     .ck-content{
       color: ${colors.white};
       background: ${colors.black};
+      height: auto;
+      min-height: 200px !important;
       &:focus{
         outline: none;
         background: ${colors.indigo};

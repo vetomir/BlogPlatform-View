@@ -1,7 +1,7 @@
 import {Component} from "react";
 import styled from "styled-components";
 import {Button_1} from "../utils/Buttons";
-import {ImageInput, Input, Select, Textarea} from "./FormItems";
+import {ImageInput, Input, Select, TagInput, Textarea} from "./FormItems";
 import {findSpace, validContent, validURL} from "../utils/Validations";
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -15,7 +15,8 @@ import CategoryService from "../../controllers/CategoryService";
 import {Redirect} from "react-router-dom";
 import DocumentMeta from "react-document-meta";
 import {AlertServer} from "../utils/Alerts";
-import {CKEditorConfig} from "./CKEditorConfig";
+import {CKEditorConfig, EditorWrapper} from "./CKEditorConfig";
+import {BiErrorAlt} from "react-icons/bi";
 
 class PostCreateForm extends Component {
     constructor(props) {
@@ -47,14 +48,6 @@ class PostCreateForm extends Component {
             error:'',
             meta: {
                 title: 'Login | blogs.',
-                description: 'I am a description, and I can create multiple tags',
-                canonical: '/login',
-                meta: {
-                    charset: 'utf-8',
-                    name: {
-                        keywords: 'react,meta,document,html,tags'
-                    }
-                },
             }
         }
 
@@ -229,17 +222,17 @@ class PostCreateForm extends Component {
                             type='text'
                         />
                         <label>Content</label>
-                        <>
+                        <EditorWrapper>
                             <CKEditor
                                 name="content"
                                 editor={ClassicEditor}
                                 value={newPost.content}
                                 onChange={this.onChangeContent}
                             />
-                        </>
-                        {newPost.content.length > 0 ? (
-                            <p>{validContent(newPost.content)}</p>
-                        ) : (<></>)}
+                            {newPost.content.length > 0 ? (
+                                <div className='Error'><BiErrorAlt/> {validContent(newPost.content)}</div>
+                            ) : (<></>)}
+                        </EditorWrapper>
                     </Left>
                     <Right>
                         <Select
@@ -290,7 +283,7 @@ class PostCreateForm extends Component {
                             ) : (<></>)}
                         </ImageInput>
                         <label>Tags</label>
-                        <ul>
+                        <TagInput>
                             <Input
                                 placeholder='Tags...'
                                 type="text"
@@ -305,7 +298,7 @@ class PostCreateForm extends Component {
                                     {tag} <AiOutlineCloseCircle/>
                                 </li>
                             ))}
-                        </ul>
+                        </TagInput>
                     </Right>
                 </Row>
                 <Button_1 onClick={this.addPost}>Submit</Button_1>
@@ -327,7 +320,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5rem 1rem 1rem 1rem;
+  padding: 3rem 1rem 1rem 1rem;
   label{
     color: ${colors.white};
     line-height: 2rem ;
@@ -347,6 +340,9 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 1rem;
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
 `;
 const Left = styled.div`
   width: calc(70% - .5rem);

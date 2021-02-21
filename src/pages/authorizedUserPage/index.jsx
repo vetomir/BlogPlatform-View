@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {colors} from "../../components/utils/Colors";
 import {UserEntity} from "../../controllers/entities/UserEntity";
 import AuthService from "../../controllers/AuthService";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {BiHide, BiPlus, BiShow} from "react-icons/bi";
 import {AiFillDelete, AiFillEdit, AiOutlineCloseCircle} from "react-icons/ai";
 import {ImageInput, Input} from "../../components/form/FormItems";
@@ -12,7 +12,6 @@ import PostService from "../../controllers/PostService";
 import UserService from "../../controllers/UserService";
 import DocumentMeta from "react-document-meta";
 import {AlertServer} from "../../components/utils/Alerts";
-import {LoginForm} from "../../components/form/LoginForm";
 
 class AuthorizedUserPage extends Component {
 
@@ -21,6 +20,7 @@ class AuthorizedUserPage extends Component {
         this.state = {
             currentUser: UserEntity,
             userReady: false,
+            redirect: '',
 
             newCredentials:{
                 username:'',
@@ -57,7 +57,7 @@ class AuthorizedUserPage extends Component {
         this.getCurrentUser()
     }
     getCurrentUser = async () =>{
-        AuthService.getCurrentUser().then(
+        await AuthService.getCurrentUser().then(
             response => {
                 this.setState({
                     currentUser: response.data,
@@ -84,7 +84,7 @@ class AuthorizedUserPage extends Component {
                 console.log(resMessage)
 
                 this.setState({
-                    error: resMessage
+                    redirect: '/login'
                 });
             }
         );
@@ -210,7 +210,12 @@ class AuthorizedUserPage extends Component {
     }
 
     render() {
-        const {currentUser, newCredentials, newProfile, newPhoto, error, meta} = this.state
+        const {currentUser, newCredentials, newProfile, newPhoto, error, meta, redirect} = this.state
+
+        if (redirect) {
+            return <Redirect to={redirect}/>
+        }
+
         return (
             <Wrapper>
                 <DocumentMeta {...meta} />
@@ -252,18 +257,22 @@ class AuthorizedUserPage extends Component {
                                     </Link>
                                     <div className='Modify'>
                                         {post.published ? (
-                                            <button className='Hide' onClick={() => this.togglePublish(post.id)}>
+                                            <button className='Hide' title="Hide Post"
+                                                    onClick={() => this.togglePublish(post.id)}>
                                                 <BiHide/>
                                             </button>
                                         ):(
-                                            <button className='Show' onClick={() => this.togglePublish(post.id)}>
+                                            <button className='Show' title="Show Post"
+                                                    onClick={() => this.togglePublish(post.id)}>
                                                 <BiShow/>
                                             </button>
                                         )}
-                                        <Link to={`/posts/edit?id=${post.id}`} className='Edit'>
+                                        <Link to={`/posts/edit?id=${post.id}`} title="Edit Post"
+                                              className='Edit'>
                                             <AiFillEdit/>
                                         </Link>
-                                        <button className='Delete' onClick={() => this.deletePost(post.id)}>
+                                        <button className='Delete' title="Delete Post"
+                                                onClick={() => this.deletePost(post.id)}>
                                             <AiFillDelete/>
                                         </button>
                                     </div>

@@ -30,14 +30,6 @@ class HomePage extends Component {
             /**/
             meta: {
                 title: 'Home Page | blogs.',
-                description: 'I am a description, and I can create multiple tags',
-                canonical: '/',
-                meta: {
-                    charset: 'utf-8',
-                    name: {
-                        keywords: 'react,meta,document,html,tags'
-                    }
-                }
             }
         }
     }

@@ -26,6 +26,8 @@ export const Textarea = styled.textarea`
   resize: vertical;
   font-size: 1rem;
   width: 100%;
+  min-height: 150px;
+  height: fit-content;
   padding: 1rem;
   border: 1px solid ${colors.lightGray};
   color: ${colors.white};
@@ -64,6 +66,7 @@ export const Input = styled.input`
   }
 `;
 export const Select = styled.select`
+  cursor: pointer;
   font-size: 1rem;
   position: relative;
   width: 100%;
@@ -205,5 +208,31 @@ export const ImageInput = styled.div`
           color: ${colors.lightGray};
         }
       }
-`
+`;
+const TagShow = keyframes`
+  from{
+    background: ${colors.orange};
+  }
+  to{
+    background: ${colors.indigo};
+  }
+`;
 
+export const TagInput = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  li{
+    cursor: pointer;
+    color: ${colors.white};
+    background: ${colors.indigo};
+    padding: .7rem .5rem;
+    border-radius: 10px;
+    width: fit-content;
+    margin: .5rem .5rem 0 0;
+    animation: ${TagShow} 500ms;
+    &:hover{
+      background: ${colors.orange};
+      transition: 500ms;
+    }
+  }
+`;

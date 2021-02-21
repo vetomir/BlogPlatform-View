@@ -30,7 +30,7 @@ export const AnimationLoadingWrapper = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 100;
   position: absolute;
   opacity: 1;
   background-color: ${colors.black};
@@ -64,7 +64,7 @@ export const AnimationLoadingPostSingleWrapper = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 100;
   position: absolute;
   opacity: 1;
   display: flex;
@@ -121,7 +121,7 @@ export const AnimationLoadingHeaderBarWrapper = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 100;
   position: absolute;
   opacity: 1;
   display: flex;
@@ -143,7 +143,7 @@ export const AnimationLoadingCommentBarWrapper = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 100;
   position: absolute;
   opacity: 1;
   display: flex;
@@ -165,7 +165,7 @@ export const AnimationLoadingHeaderWrapper = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 999;
+  z-index: 100;
   position: absolute;
   opacity: 1;
   display: flex;
