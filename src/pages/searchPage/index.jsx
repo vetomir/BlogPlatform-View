@@ -6,7 +6,6 @@ import {colors} from "../../components/utils/Colors";
 import PostFeed from "../../components/modules/postfeed/PostFeed";
 import {PaginationSearch} from "../../components/utils/Pagination";
 import {NoContent} from "../../components/utils/Alerts";
-import AuthService from "../../controllers/AuthService";
 
 class SearchPage extends Component {
     constructor(props) {

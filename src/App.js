@@ -10,9 +10,7 @@ import LoginPage from "./pages/loginPage";
 import RegisterPage from "./pages/registerPage";
 import UserPage from "./pages/userPage";
 import AuthorizedUserPage from "./pages/authorizedUserPage";
-import CommentEditPage from "./pages/commentEditPage";
 import PostEditPage from "./pages/postEditPage";
-import AdminPage from "./pages/adminPage";
 import TopBar from "./components/topBar/TopBar";
 import Footer from "./components/footer/Footer";
 

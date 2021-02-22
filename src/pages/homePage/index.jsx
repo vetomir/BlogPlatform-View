@@ -10,7 +10,6 @@ import CommentService from "../../controllers/CommentService";
 import PostFeed from "../../components/modules/postfeed/PostFeed";
 import {colors} from "../../components/utils/Colors";
 import DocumentMeta from 'react-document-meta';
-import {getStatus} from "../../controllers/Config";
 
 class HomePage extends Component {
     constructor(props) {

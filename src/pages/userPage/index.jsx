@@ -4,7 +4,6 @@ import {UserEntity} from "../../controllers/entities/UserEntity";
 import styled from "styled-components";
 import {colors} from "../../components/utils/Colors";
 import PostFeedBig from "../../components/modules/postfeedBig/PostFeedBig";
-import AuthService from "../../controllers/AuthService";
 
 class UserPage extends Component {
     constructor(props) {
