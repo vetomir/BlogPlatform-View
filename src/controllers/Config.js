@@ -8,7 +8,12 @@ export default function AuthHeaders() {
     const token = JSON.parse(localStorage.getItem('user'));
 
     if (token) {
-        return { Authorization: 'Bearer ' + token };
+        return {
+            Authorization: 'Bearer ' + token ,
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+            Accept: "application/json"
+        };
     } else {
         return {};
     }
