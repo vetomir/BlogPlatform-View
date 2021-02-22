@@ -2,7 +2,7 @@
   "name": "newsportalreact",
   "version": "0.1.0",
   "private": true,
-  "proxy": "portfolio-blog-spring.herokuapp.com/api",
+  "proxy": "http://localhost:8080/api",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^25.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.1",
