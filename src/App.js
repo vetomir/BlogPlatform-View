@@ -13,12 +13,24 @@ import AuthorizedUserPage from "./pages/authorizedUserPage";
 import PostEditPage from "./pages/postEditPage";
 import TopBar from "./components/topBar/TopBar";
 import Footer from "./components/footer/Footer";
+import DocumentMeta from "react-document-meta";
+
+const meta = {
+    description: 'BlogPlatform React application',
+    canonical: '/',
+    meta: {
+        charset: 'utf-8',
+        name: {
+            keywords: 'react,application,portfolio'
+        }
+    },
+};
 
 function App() {
   return (
       <>
+          <DocumentMeta {...meta} />
           <GlobalStyle/>
-          {/**/}
           <Router>
               <TopBar/>
               {/**/}

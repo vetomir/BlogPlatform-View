@@ -27,14 +27,6 @@ class RegisterPage extends Component {
             redirect: '',
             meta: {
                 title: 'Register | blogs.',
-                description: 'I am a description, and I can create multiple tags',
-                canonical: '/register',
-                meta: {
-                    charset: 'utf-8',
-                    name: {
-                        keywords: 'react,meta,document,html,tags'
-                    }
-                },
             }
         }
     }
