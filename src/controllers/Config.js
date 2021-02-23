@@ -8,7 +8,6 @@ export default function AuthHeaders() {
         return {
             Authorization: 'Bearer ' + token ,
             'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "https://portfolio-blog-spring.herokuapp.com",
             Accept: "application/json"
         };
     } else {
