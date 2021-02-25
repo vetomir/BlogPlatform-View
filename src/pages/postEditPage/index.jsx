@@ -196,7 +196,7 @@ class PostEditPage extends Component {
     updateText = e => {
         e.preventDefault()
         const {post , newPostText} = this.state
-        UserService.updatePhoto(post.id, newPostText).then(
+        PostService.updateTitleLeadAndContent(post.id, newPostText).then(
             response => {
                 window.location.reload()
             },
@@ -213,7 +213,7 @@ class PostEditPage extends Component {
     updatePhoto = e => {
         e.preventDefault()
         const {post , newPostPhoto} = this.state
-        UserService.updatePhoto(post.id, newPostPhoto).then(
+        PostService.updatePhoto(post.id, newPostPhoto).then(
             response => {
                 window.location.reload()
             },
@@ -230,7 +230,7 @@ class PostEditPage extends Component {
     updateCategory = e => {
         e.preventDefault()
         const {post , newPostCategory} = this.state
-        UserService.updatePhoto(post.id, newPostCategory.categoryId).then(
+        PostService.updateCategory(post.id, newPostCategory.categoryId).then(
             response => {
                 window.location.reload()
             },
