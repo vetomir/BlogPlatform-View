@@ -74,10 +74,6 @@ class LoginPage extends Component {
             <LoginForm>
                 <DocumentMeta {...meta} />
                 <AlertServer error={error}/>
-                <Demo>
-                    <p>Username: test1@test.pl</p>
-                    <p>Password: test123</p>
-                </Demo>
                 <div className='Form'>
                     <label>Username</label>
                     <Input
@@ -97,6 +93,10 @@ class LoginPage extends Component {
                     />
                     <Button_1 onClick={this.login}>Submit</Button_1>
                 </div>
+                <Demo>
+                    <p>Username: test1@test.pl</p>
+                    <p>Password: test123</p>
+                </Demo>
             </LoginForm>
         )
     }

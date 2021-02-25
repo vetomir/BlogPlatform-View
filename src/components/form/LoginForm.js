@@ -11,13 +11,14 @@ const appear = keyframes`
   }
 `;
 export const LoginForm = styled.div`
+  min-height: 100vh;
   animation: ${appear} 1s;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 1200px;
-  padding: 10rem;
+  padding: 5rem;
   margin: 0 auto;
   @media screen and (max-width: 1200px) {
     width: 100%;
