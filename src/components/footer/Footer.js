@@ -43,10 +43,10 @@ const Wrapper = styled.ul`
   li{
     a{
       display: flex;
-      color: ${colors.black};
+      color: ${colors.white};
       font-size: 1.5rem;
       text-decoration: none;
-      border: 2px solid ${colors.black};
+      border: 2px solid ${colors.white};
       padding: .5rem 1rem;
       margin: 0 1rem;
       border-radius: 10px;
@@ -54,8 +54,8 @@ const Wrapper = styled.ul`
         margin-left: .5rem;
       }
       &:hover{
-        color: ${colors.white};
-        border: 2px solid ${colors.white};
+        color: ${colors.orange};
+        border: 2px solid ${colors.orange};
         transition: 500ms;
       }
     }
