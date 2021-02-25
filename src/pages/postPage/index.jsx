@@ -159,8 +159,9 @@ class PostPage extends Component {
     }
 
     addComment = () =>{
-        CommentService.add(this.state.id, this.state.newComment).then(
+        CommentService.add(this.state.id, this.state.newComment, null).then(
             response => {
+                console.log("Comment Added!")
                 window.location.reload()
             },
             error => {
