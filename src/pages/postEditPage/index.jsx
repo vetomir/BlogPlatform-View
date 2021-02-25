@@ -13,6 +13,7 @@ import {CKEditorConfig, EditorWrapper} from "../../components/form/CKEditorConfi
 import {AiFillEdit, AiOutlineCloseCircle} from "react-icons/ai";
 import styled from "styled-components";
 import {colors} from "../../components/utils/Colors";
+import UserService from "../../controllers/UserService";
 
 class PostEditPage extends Component {
     constructor(props) {
@@ -50,11 +51,11 @@ class PostEditPage extends Component {
                 photoUrl:'',
                 photoSource:'',
             },
-            newPostTags:[
+/*            newPostTags:[
                 {
                     name:'',
                 },
-            ],
+            ],*/
 
             allCategories: [
                 {
@@ -192,6 +193,57 @@ class PostEditPage extends Component {
         })
     }
 
+    updateText = e => {
+        e.preventDefault()
+        const {post , newPostText} = this.state
+        UserService.updatePhoto(post.id, newPostText).then(
+            response => {
+                window.location.reload()
+            },
+            error => {
+                const resMessage = error.response.data
+                console.log(resMessage)
+
+                this.setState({
+                    error: resMessage
+                });
+            }
+        );
+    }
+    updatePhoto = e => {
+        e.preventDefault()
+        const {post , newPostPhoto} = this.state
+        UserService.updatePhoto(post.id, newPostPhoto).then(
+            response => {
+                window.location.reload()
+            },
+            error => {
+                const resMessage = error.response.data
+                console.log(resMessage)
+
+                this.setState({
+                    error: resMessage
+                });
+            }
+        );
+    }
+    updateCategory = e => {
+        e.preventDefault()
+        const {post , newPostCategory} = this.state
+        UserService.updatePhoto(post.id, newPostCategory.categoryId).then(
+            response => {
+                window.location.reload()
+            },
+            error => {
+                const resMessage = error.response.data
+                console.log(resMessage)
+
+                this.setState({
+                    error: resMessage
+                });
+            }
+        );
+    }
     render() {
         if (this.state.redirect) {
             return <Redirect to={this.state.redirect}/>
@@ -235,7 +287,7 @@ class PostEditPage extends Component {
                                 data={newPostText.content}
                             />
                         </EditorWrapper>
-                        <Button >
+                        <Button onClick={this.updateText}>
                             <AiFillEdit/> Edit Text
                         </Button>
                     </Form>
@@ -252,7 +304,7 @@ class PostEditPage extends Component {
                             )}
 
                         </Select>
-                        <Button >
+                        <Button onClick={this.updateCategory}>
                             <AiFillEdit/> Edit Category
                         </Button>
                     </Form>
@@ -294,7 +346,7 @@ class PostEditPage extends Component {
                                 </>
                             ) : (<></>)}
                         </ImageInput>
-                        <Button >
+                        <Button onClick={this.updatePhoto}>
                             <AiFillEdit/> Edit Photo
                         </Button>
 

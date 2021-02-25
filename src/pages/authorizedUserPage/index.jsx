@@ -122,7 +122,7 @@ class AuthorizedUserPage extends Component {
         });
     }
 
-    changeCredentials = e => {
+    updateCredentials = e => {
         e.preventDefault()
         const {currentUser , newCredentials} = this.state
         UserService.updateCredentials(currentUser.id, newCredentials).then(
@@ -140,7 +140,7 @@ class AuthorizedUserPage extends Component {
         );
     }
 
-    changeProfile = e => {
+    updateProfile = e => {
 
         e.preventDefault()
         const {currentUser , newProfile} = this.state
@@ -159,7 +159,7 @@ class AuthorizedUserPage extends Component {
         );
     }
 
-    changePhoto = e => {
+    updatePhoto = e => {
         e.preventDefault()
         const {currentUser , newPhoto} = this.state
         UserService.updatePhoto(currentUser.id, newPhoto).then(
@@ -304,7 +304,7 @@ class AuthorizedUserPage extends Component {
                                 onChange={this.onChangeForNewCredentials}
                                 type='password'
                             />
-                            <Button onClick={this.changeCredentials}>
+                            <Button onClick={this.updateCredentials}>
                                 <AiFillEdit/> Submit
                             </Button>
                         </div>
@@ -331,7 +331,7 @@ class AuthorizedUserPage extends Component {
                                 onChange={this.onChangeForNewProfile}
                                 type='text'
                             />
-                            <Button onClick={this.changeProfile}>
+                            <Button onClick={this.updateProfile}>
                                 <AiFillEdit/> Submit
                             </Button>
                         </div>
@@ -364,7 +364,7 @@ class AuthorizedUserPage extends Component {
                                     </>
                                 ) : (<></>)}
                             </ImageInput>
-                            <Button onClick={this.changePhoto}>
+                            <Button onClick={this.updatePhoto}>
                                 <AiFillEdit/> Submit
                             </Button>
                         </div>
