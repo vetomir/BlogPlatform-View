@@ -26,7 +26,7 @@ class CommentService {
         return axios.get(URL + `/${id}`, { headers: AuthHeaders() });
     }
 
-    add(body) {
+    add(postId , body) {
         return axios.post(URL + `/${postId}`, body, { headers: AuthHeaders()});
     }
 
