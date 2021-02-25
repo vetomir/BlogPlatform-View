@@ -105,9 +105,10 @@ export default LoginPage;
 
 const Demo = styled.div`
   background-color: ${colors.indigo};
-  padding: 1rem;
+  padding: .5rem 1rem;
   border-radius: 10px;
   p{
     color: ${colors.white};
+    padding: .3rem;
   }
 `
