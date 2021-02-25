@@ -110,6 +110,9 @@ class PostEditPage extends Component {
                         photoUrl: currentPost.photoUrl,
                         photoSource: currentPost.photoSource,
                     },
+                    newPostCategory:{
+                        categoryId: currentPost.category.id,
+                    },
                 })
             },
             error => {
@@ -189,6 +192,15 @@ class PostEditPage extends Component {
             newPostPhoto: {
                 ...this.state.newPostPhoto,
                 [e.target.name]: e.target.value
+            }
+        })
+    }
+
+    onChangeCategory = e => {
+        this.setState({
+            newPostCategory: {
+                ...this.state.newPostCategory,
+                categoryId: e.target.value
             }
         })
     }
