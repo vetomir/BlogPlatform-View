@@ -6,6 +6,8 @@ import {Redirect} from "react-router-dom";
 import {LoginForm} from "../../components/form/LoginForm";
 import {AlertServer} from "../../components/utils/Alerts";
 import DocumentMeta from "react-document-meta";
+import styled from "styled-components"
+import {colors} from "../../components/utils/Colors";
 
 class LoginPage extends Component {
     constructor(props) {
@@ -72,6 +74,10 @@ class LoginPage extends Component {
             <LoginForm>
                 <DocumentMeta {...meta} />
                 <AlertServer error={error}/>
+                <Demo>
+                    <p>Username: test1@test.pl</p>
+                    <p>Password: test123</p>
+                </Demo>
                 <div className='Form'>
                     <label>Username</label>
                     <Input
@@ -96,3 +102,12 @@ class LoginPage extends Component {
     }
 }
 export default LoginPage;
+
+const Demo = styled.div`
+  background-color: ${colors.indigo};
+  padding: 1rem;
+  border-radius: 10px;
+  p{
+    color: ${colors.white};
+  }
+`
