@@ -48,7 +48,7 @@ class PostService {
     }
 
     updateCategory(id, categoryId) {
-        return axios.patch(URL + `/${id}/category?id=${categoryId}`, null, { headers: AuthHeaders()});
+        return axios.patch(URL + `/${id}/category/${categoryId}`, null, { headers: AuthHeaders()});
     }
 
     updateTags(id, tagList) {

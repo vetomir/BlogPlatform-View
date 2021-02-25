@@ -45,7 +45,7 @@ class PostEditPage extends Component {
                 content:'',
             },
             newPostCategory:{
-                categoryId:'',
+                categoryId:0,
             },
             newPostPhoto:{
                 photoUrl:'',
