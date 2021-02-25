@@ -309,7 +309,7 @@ class PostEditPage extends Component {
                         <Select
                             name='categoryId'
                             value={newPostCategory.categoryId}
-                            onChange={this.onChange}
+                            onChange={this.onChangeCategory}
                         >
                             {categories.map( category =>
                                 <option value={category.id}>{category.name}</option>
